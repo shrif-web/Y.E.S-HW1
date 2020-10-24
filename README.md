@@ -1,4 +1,4 @@
-# Y.E.S first HomeWork
+# Y.E.S First HomeWork
 
 ## Members:
 	ArshiA Akhavan			97110422
