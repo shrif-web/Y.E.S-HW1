@@ -13,7 +13,7 @@
 		      'Accept': 'application/json',
 		      'Content-Type': 'application/json'
 		    },
-		    body: JSON.stringify({f: document.getElementById("first_input").value, s: document.getElementById("second_input").value})
+		    body: JSON.stringify({first: document.getElementById("first_input").value, second: document.getElementById("second_input").value})
 		  });
 		  const content = await rawResponse.json();
 		  document.getElementById("result").innerText=content.result;
