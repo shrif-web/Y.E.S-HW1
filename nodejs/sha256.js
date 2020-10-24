@@ -1,9 +1,12 @@
-const express = require('express')
-const app = express()
-const port = 8080
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const port = 8080;
 
-app.get('/nodejs/sha256',(req,res) =>{
-    res.send("shallum")
+app.use(cors());
+app.get('/nodejs/sha256', (req, res) => {
+  res.json({ result: 12 });
+  console.log(res);
 })
 
 app.listen(port, () => {

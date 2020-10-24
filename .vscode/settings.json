@@ -1,9 +1,0 @@
-{
-    "cSpell.enableFiletypes": [
-        "ansible",
-        "go.mod",
-        "go.sum",
-        "makefile",
-        "proto3"
-    ]
-}

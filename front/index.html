@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Y.E.S.</title>
+</head>
+
+<script type="text/javascript">
+	onHttpReq=()=>{
+		reqListener=()=>{
+			var data=JSON.parse(oReq.responseText);
+			console.log(data);
+		}
+		onReqError=(err)=>console.log("log");
+		oReq=new XMLHttpRequest();
+		oReq.onload=reqListener;
+		oReq.onerror=onReqError;
+		oReq.open('get','http://localhost:8080/nodejs/sha256');
+		oReq.send();
+	}
+</script>
+<body>
+	<!-- <form action=> -->
+    <input type="input" name="first number">
+    <input type="input" name="scond number">
+    <button  name="submit" onclick="onButtonClick()">alert</button>
+    <button  name="submit" onclick="onHttpReq()">submit</button>
+		
+	<!-- </form> -->
+</body>
+</html>
