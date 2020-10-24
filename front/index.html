@@ -5,26 +5,27 @@
 </head>
 
 <script type="text/javascript">
-	onHttpReq=()=>{
-		reqListener=()=>{
-			var data=JSON.parse(oReq.responseText);
-			console.log(data);
-		}
-		onReqError=(err)=>console.log("log");
-		oReq=new XMLHttpRequest();
-		oReq.onload=reqListener;
-		oReq.onerror=onReqError;
-		oReq.open('get','http://localhost:8080/nodejs/sha256');
-		oReq.send();
-	}
+    function submit(){
+    	(async () => {
+		  const rawResponse = await fetch('http://localhost:8080/nodejs/sha256', {
+		    method: 'POST',
+		    headers: {
+		      'Accept': 'application/json',
+		      'Content-Type': 'application/json'
+		    },
+		    body: JSON.stringify({f: document.getElementById("first_input").value, s: document.getElementById("second_input").value})
+		  });
+		  const content = await rawResponse.json();
+		  document.getElementById("result").innerText=content.result;
+		  console.log(content);
+		})();
+  }
+
 </script>
 <body>
-	<!-- <form action=> -->
-    <input type="input" name="first number">
-    <input type="input" name="scond number">
-    <button  name="submit" onclick="onButtonClick()">alert</button>
-    <button  name="submit" onclick="onHttpReq()">submit</button>
-		
-	<!-- </form> -->
+	<input type="input" id="first_input">
+    <input type="input" id="second_input">
+    <button onclick="submit()">submit</button>
+    <p id="result">nadarim agha<p>	
 </body>
 </html>
