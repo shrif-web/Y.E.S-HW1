@@ -15,7 +15,7 @@
 	}
 	
     async function write_go() {
-      const line_number = document.getElementById("first_input").value;
+      const line_number = document.getElementById("line_number").value;
       const rawResponse = await fetch(
         `http://localhost:8888/go/write?number=${line_number}`,
         {
@@ -27,7 +27,7 @@
         }
 	  );
       const content = await rawResponse.text()
-      document.getElementById("result").innerText = content;
+      document.getElementById("line").innerText = content;
     }
 
     function submit_nodejs() {
@@ -71,7 +71,8 @@
   </script>
   <body>
     <input type="input" id="first_input" />
-    <input type="input" id="second_input" />
+	<input type="input" id="second_input" />
+	<input type="input" id="line_number" placeholder="enter line number ..."/>
     <button onclick="submit_nodejs()">nodejs</button>
     <button onclick="submit_go()">go</button>
     <button onclick="write_go()">write go</button>
