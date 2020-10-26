@@ -5,7 +5,7 @@
 </head>
 
 <script type="text/javascript">
-    function submit(){
+    function submit_nodejs(){
     	(async () => {
 		  const rawResponse = await fetch('http://localhost:8080/nodejs/sha256', {
 		    method: 'POST',
@@ -19,13 +19,29 @@
 		  document.getElementById("result").innerText=content.result;
 		  console.log(content);
 		})();
-  }
+    }
+    function submit_go(){
+    	(async () => {
+		  const rawResponse = await fetch('http://localhost:8888/go/sha256', {
+		    method: 'POST',
+		    headers: {
+		      'Accept': 'application/json',
+		      'Content-Type': 'application/json'
+		    },
+		    body: JSON.stringify({first: document.getElementById("first_input").value, second: document.getElementById("second_input").value})
+		  });
+		  const content = await rawResponse.json();
+		  document.getElementById("result").innerText=content.result;
+		  console.log(content);
+		})();
+    } 
 
 </script>
 <body>
 	<input type="input" id="first_input">
     <input type="input" id="second_input">
-    <button onclick="submit()">submit</button>
+    <button onclick="submit_nodejs()">nodejs</button>
+    <button onclick="submit_go()">go</button>
     <p id="result">nadarim agha<p>	
 </body>
 </html>
