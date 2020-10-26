@@ -1,18 +1,18 @@
 package main
 
 import (
+	"bufio"
 	"crypto"
 	"encoding/hex"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/rs/cors"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
-	"bufio"
 	"os"
-	"github.com/rs/cors"
-
+	"strconv"
 )
 
 type sha256RequestBody struct {
@@ -25,17 +25,16 @@ type sha256ResponseBody struct {
 }
 
 func checkError(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
-
 
 func main() {
-	handleRequests("",8888)
+	handleRequests("", 8888)
 }
 
-func handleRequests(domain string ,port int) {
+func handleRequests(domain string, port int) {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", homePage)
@@ -43,59 +42,52 @@ func handleRequests(domain string ,port int) {
 	mux.HandleFunc("/go/write", write)
 
 	handler := cors.Default().Handler(mux)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d",domain,port), handler))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d", domain, port), handler))
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/"{
-		log.Printf("new session initiated with client:[%s]",r.RemoteAddr)
+	if r.URL.Path == "/" {
+		log.Printf("new session initiated with client:[%s]", r.RemoteAddr)
 		http.ServeFile(w, r, "./../front")
-	}else{
-		log.Printf("client [%s] tried to reach unsupported path , refusing ",r.RemoteAddr)
+	} else {
+		log.Printf("client [%s] tried to reach unsupported path , refusing ", r.RemoteAddr)
 		http.Error(w, "the page you are looking for is not yet backed!", http.StatusNotFound)
 	}
 }
 
-func readFile(line_number int) string{
+func readFile(lineNumber int) (string, error) {
 	file, err := os.Open("test.txt")
- 
 	if err != nil {
 		log.Fatalf("failed opening file: %s", err)
 	}
- 
+	defer file.Close()
+
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
-	var txtlines []string
- 
+	var textlines []string
 	for scanner.Scan() {
-		txtlines = append(txtlines, scanner.Text())
+		textlines = append(textlines, scanner.Text())
 	}
-	var linesNumber int = len(txtlines)
- 
-	file.Close()
+	linesNumber := len(textlines)
 
-	if line_number > linesNumber || line_number < 1 {
-		return "Error"
+	if lineNumber > linesNumber || lineNumber < 1 {
+		return "", errors.New("line out of bound exception")
 	} else {
-		return txtlines[line_number - 1]
+		return textlines[lineNumber-1], nil
 	}
 }
 
 func write(w http.ResponseWriter, r *http.Request) {
 
-	number, err := strconv.Atoi(r.URL.Query().Get("number"))
+	number, _ := strconv.Atoi(r.URL.Query().Get("number"))
 
-	var line string = readFile(number)
-	if line == "Error" {
+	line,err := readFile(number)
+	if err != nil {
 		http.Error(w, "please enter a valid number", http.StatusMethodNotAllowed)
-		return 
+		return
 	}
-	fmt.Fprintf(w, line)
-
-	_ = err
-
+	_, _ = fmt.Fprintf(w, line)
 }
-
 
 func sha256(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
