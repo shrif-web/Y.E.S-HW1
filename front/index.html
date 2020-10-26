@@ -5,17 +5,29 @@
   </head>
 
   <script type="text/javascript">
+
+    function string2Bin(str) {
+      var result = [];
+      for (var i = 0; i < str.length; i++) {
+        result.push(str.charCodeAt(i).toString(2));
+      }
+      return result;
+	}
+	
     async function write_go() {
-		const line_number = document.getElementById("first_input").value
-      const rawResponse = await fetch(`http://localhost:8888/go/write?number=${line_number}`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-		},
-      });
-    //   const content = await rawResponse.json();
-    //   console.log("** answer:", content);
+      const line_number = document.getElementById("first_input").value;
+      const rawResponse = await fetch(
+        `http://localhost:8888/go/write?number=${line_number}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
+	  );
+      const content = await rawResponse.text()
+      document.getElementById("result").innerText = content;
     }
 
     function submit_nodejs() {
@@ -30,7 +42,8 @@
             first: document.getElementById("first_input").value,
             second: document.getElementById("second_input").value
           })
-        });
+		});
+		// console.log("testtttttttt", rawResponse)
         const content = await rawResponse.json();
         document.getElementById("result").innerText = content.result;
         console.log(content);
@@ -60,10 +73,10 @@
     <input type="input" id="first_input" />
     <input type="input" id="second_input" />
     <button onclick="submit_nodejs()">nodejs</button>
-	<button onclick="submit_go()">go</button>
-	<button onclick="write_go()">write go</button>
+    <button onclick="submit_go()">go</button>
+    <button onclick="write_go()">write go</button>
 
     <p id="result">nadarim agha</p>
-    <p></p>
+    <p id="line"></p>
   </body>
 </html>

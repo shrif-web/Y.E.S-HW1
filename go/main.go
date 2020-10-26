@@ -66,7 +66,7 @@ func readFile(line_number int) string{
  
 	file.Close()
 
-	if line_number > linesNumber {
+	if line_number > linesNumber || line_number < 1 {
 		return "Error"
 	} else {
 		return txtlines[line_number - 1]
@@ -74,12 +74,15 @@ func readFile(line_number int) string{
 }
 
 func write(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("._. in Go file in write function")
 
 	number, err := strconv.Atoi(r.URL.Query().Get("number"))
 
 	var line string = readFile(number)
-	fmt.Println("--line is :", line)
+	if line == "Error" {
+		http.Error(w, "please enter a valid number", http.StatusMethodNotAllowed)
+		return 
+	}
+	fmt.Fprintf(w, line)
 
 	_ = err
 
