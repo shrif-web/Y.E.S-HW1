@@ -5,10 +5,12 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"os"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
+	"bufio"
 
 	"github.com/rs/cors"
 )
@@ -20,6 +22,12 @@ type sha256RequestBody struct {
 
 type sha256ResponseBody struct {
 	Result string `json:"result"`
+}
+
+func checkError(e error) {
+    if e != nil {
+        panic(e)
+    }
 }
 
 func handleRequests() {
@@ -40,11 +48,39 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "please use a POST method", http.StatusNotFound)
 }
 
+func readFile(line_number int) string{
+	file, err := os.Open("test.txt")
+ 
+	if err != nil {
+		log.Fatalf("failed opening file: %s", err)
+	}
+ 
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	var txtlines []string
+ 
+	for scanner.Scan() {
+		txtlines = append(txtlines, scanner.Text())
+	}
+	var linesNumber int = len(txtlines)
+ 
+	file.Close()
+
+	if line_number > linesNumber {
+		return "Error"
+	} else {
+		return txtlines[line_number - 1]
+	}
+}
+
 func write(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("._. in Go file in write function")
 
 	number, err := strconv.Atoi(r.URL.Query().Get("number"))
-	fmt.Println("number is ", number + 1)
+
+	var line string = readFile(number)
+	fmt.Println("--line is :", line)
+
 	_ = err
 
 }
