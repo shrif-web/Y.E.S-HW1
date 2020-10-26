@@ -1,47 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Y.E.S.</title>
-</head>
+  <head>
+    <title>Y.E.S.</title>
+  </head>
 
-<script type="text/javascript">
-    function submit_nodejs(){
-    	(async () => {
-		  const rawResponse = await fetch('http://localhost:8080/nodejs/sha256', {
-		    method: 'POST',
-		    headers: {
-		      'Accept': 'application/json',
-		      'Content-Type': 'application/json'
-		    },
-		    body: JSON.stringify({first: document.getElementById("first_input").value, second: document.getElementById("second_input").value})
-		  });
-		  const content = await rawResponse.json();
-		  document.getElementById("result").innerText=content.result;
-		  console.log(content);
-		})();
+  <script type="text/javascript">
+
+    function string2Bin(str) {
+      var result = [];
+      for (var i = 0; i < str.length; i++) {
+        result.push(str.charCodeAt(i).toString(2));
+      }
+      return result;
+	}
+	
+    async function write_go() {
+      const line_number = document.getElementById("line_number").value;
+      const rawResponse = await fetch(
+        `http://localhost:8888/go/write?number=${line_number}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
+	  );
+      const content = await rawResponse.text()
+      document.getElementById("line").innerText = content;
     }
-    function submit_go(){
-    	(async () => {
-		  const rawResponse = await fetch('http://localhost:8888/go/sha256', {
-		    method: 'POST',
-		    headers: {
-		      'Accept': 'application/json',
-		      'Content-Type': 'application/json'
-		    },
-		    body: JSON.stringify({first: document.getElementById("first_input").value, second: document.getElementById("second_input").value})
-		  });
-		  const content = await rawResponse.json();
-		  document.getElementById("result").innerText=content.result;
-		  console.log(content);
-		})();
-    } 
 
-</script>
-<body>
-	<input type="input" id="first_input">
-    <input type="input" id="second_input">
+    function submit_nodejs() {
+      (async () => {
+        const rawResponse = await fetch("http://localhost:8080/nodejs/sha256", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            first: document.getElementById("first_input").value,
+            second: document.getElementById("second_input").value
+          })
+		});
+		// console.log("testtttttttt", rawResponse)
+        const content = await rawResponse.json();
+        document.getElementById("result").innerText = content.result;
+        console.log(content);
+      })();
+    }
+
+    function submit_go() {
+      (async () => {
+        const rawResponse = await fetch("http://localhost:8888/go/sha256", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            first: document.getElementById("first_input").value,
+            second: document.getElementById("second_input").value
+          })
+        });
+        const content = await rawResponse.json();
+        document.getElementById("result").innerText = content.result;
+        console.log(content);
+      })();
+    }
+  </script>
+  <body>
+    <input type="input" id="first_input" />
+	<input type="input" id="second_input" />
+	<input type="input" id="line_number" placeholder="enter line number ..."/>
     <button onclick="submit_nodejs()">nodejs</button>
     <button onclick="submit_go()">go</button>
-    <p id="result">nadarim agha<p>	
-</body>
+    <button onclick="write_go()">write go</button>
+
+    <p id="result">nadarim agha</p>
+    <p id="line"></p>
+  </body>
 </html>

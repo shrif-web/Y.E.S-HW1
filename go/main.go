@@ -5,11 +5,14 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/rs/cors"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
+	"bufio"
+	"os"
+	"github.com/rs/cors"
+
 )
 
 type sha256RequestBody struct {
@@ -21,6 +24,13 @@ type sha256ResponseBody struct {
 	Result string `json:"result"`
 }
 
+func checkError(e error) {
+    if e != nil {
+        panic(e)
+    }
+}
+
+
 func main() {
 	handleRequests("",8888)
 }
@@ -30,6 +40,7 @@ func handleRequests(domain string ,port int) {
 
 	mux.HandleFunc("/", homePage)
 	mux.HandleFunc("/go/sha256", sha256)
+	mux.HandleFunc("/go/write", write)
 
 	handler := cors.Default().Handler(mux)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d",domain,port), handler))
@@ -44,6 +55,48 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "the page you are looking for is not yet backed!", http.StatusNotFound)
 	}
 }
+
+func readFile(line_number int) string{
+	file, err := os.Open("test.txt")
+ 
+	if err != nil {
+		log.Fatalf("failed opening file: %s", err)
+	}
+ 
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	var txtlines []string
+ 
+	for scanner.Scan() {
+		txtlines = append(txtlines, scanner.Text())
+	}
+	var linesNumber int = len(txtlines)
+ 
+	file.Close()
+
+	if line_number > linesNumber || line_number < 1 {
+		return "Error"
+	} else {
+		return txtlines[line_number - 1]
+	}
+}
+
+func write(w http.ResponseWriter, r *http.Request) {
+
+	number, err := strconv.Atoi(r.URL.Query().Get("number"))
+
+	var line string = readFile(number)
+	if line == "Error" {
+		http.Error(w, "please enter a valid number", http.StatusMethodNotAllowed)
+		return 
+	}
+	fmt.Fprintf(w, line)
+
+	_ = err
+
+}
+
+
 func sha256(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "POST":
