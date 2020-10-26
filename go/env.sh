@@ -1,0 +1,1 @@
+export GOPATH="/home/kycilius/Documents/Code/Y.E.S./go"
