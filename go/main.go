@@ -22,17 +22,16 @@ type sha256ResponseBody struct {
 	Result string `json:"result"`
 }
 
-func handleRequests() {
+func main() {
+	handleRequests("localhost",8888)
+}
+
+func handleRequests(domain string ,port int) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", homePage)
 	mux.HandleFunc("/go/sha256", sha256)
 	handler := cors.Default().Handler(mux)
-	log.Fatal(http.ListenAndServe(":8888", handler))
-
-}
-
-func main() {
-	handleRequests()
+	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d",domain,port), handler))
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
