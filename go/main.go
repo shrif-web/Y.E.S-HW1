@@ -18,7 +18,7 @@ type sha256RequestBody struct {
 	Second string `json:"second"`
 }
 
-type sha256ResponceBody struct {
+type sha256ResponseBody struct {
 	Result string `json:"result"`
 }
 
@@ -60,7 +60,7 @@ func sha256(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Accept", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
-		_ = json.NewEncoder(w).Encode(sha256ResponceBody{hex.EncodeToString(hasher.Sum(nil))})
+		_ = json.NewEncoder(w).Encode(sha256ResponseBody{hex.EncodeToString(hasher.Sum(nil))})
 	default:
 		http.Error(w, "please use a POST method", http.StatusMethodNotAllowed)
 	}
