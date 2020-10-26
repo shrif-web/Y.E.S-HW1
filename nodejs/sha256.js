@@ -1,3 +1,4 @@
+const sha256 = require('js-sha256');
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/nodejs/sha256',function(req,res){
   console.log("request body:",req.body);
   res.json({
-    result: Number(req.body.first)+Number(req.body.second)
+    result: sha256((Number(req.body.first)+Number(req.body.second)).toString())
   });
 });
 
