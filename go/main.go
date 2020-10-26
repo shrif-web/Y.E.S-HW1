@@ -5,12 +5,11 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/rs/cors"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
-
-	"github.com/rs/cors"
 )
 
 type sha256RequestBody struct {
@@ -23,34 +22,51 @@ type sha256ResponseBody struct {
 }
 
 func main() {
-	handleRequests("localhost",8888)
+	handleRequests("",8888)
 }
 
 func handleRequests(domain string ,port int) {
 	mux := http.NewServeMux()
+
 	mux.HandleFunc("/", homePage)
 	mux.HandleFunc("/go/sha256", sha256)
+
 	handler := cors.Default().Handler(mux)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("%s:%d",domain,port), handler))
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	http.Error(w, "please use a POST method", http.StatusNotFound)
+	if r.URL.Path == "/"{
+		log.Printf("new session initiated with client:[%s]",r.RemoteAddr)
+		http.ServeFile(w, r, "./../front")
+	}else{
+		log.Printf("client [%s] tried to reach unsupported path , refusing ",r.RemoteAddr)
+		http.Error(w, "the page you are looking for is not yet backed!", http.StatusNotFound)
+	}
 }
 func sha256(w http.ResponseWriter, r *http.Request) {
-	fmt.Print()
-
 	switch r.Method {
 	case "POST":
 		b, err := ioutil.ReadAll(r.Body)
 		var operands sha256RequestBody
 		err = json.Unmarshal(b, &operands)
 		if err != nil {
-			http.Error(w, err.Error(), 500)
+			http.Error(w, err.Error(), http.StatusUnprocessableEntity)
 			return
 		}
+
 		first, err := strconv.Atoi(operands.First)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnprocessableEntity)
+			return
+		}
+
 		second, err := strconv.Atoi(operands.Second)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusUnprocessableEntity)
+			return
+		}
+
 		result := []byte(strconv.Itoa(first + second))
 		hasher := crypto.SHA256.New()
 		hasher.Write(result)
