@@ -26,6 +26,7 @@ func handleRequests() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", homePage)
 	mux.HandleFunc("/go/sha256", sha256)
+	mux.HandleFunc("/go/write", write)
 	handler := cors.Default().Handler(mux)
 	log.Fatal(http.ListenAndServe(":8888", handler))
 
@@ -38,6 +39,17 @@ func main() {
 func homePage(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "please use a POST method", http.StatusNotFound)
 }
+
+func write(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("._. in Go file in write function")
+
+	number, err := strconv.Atoi(r.URL.Query().Get("number"))
+	fmt.Println("number is ", number + 1)
+	_ = err
+
+}
+
+
 func sha256(w http.ResponseWriter, r *http.Request) {
 	fmt.Print()
 
