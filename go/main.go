@@ -24,7 +24,7 @@ type sha256ResponceBody struct {
 
 func handleRequests() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", home_page)
+	mux.HandleFunc("/", homePage)
 	mux.HandleFunc("/go/sha256", sha256)
 	handler := cors.Default().Handler(mux)
 	log.Fatal(http.ListenAndServe(":8888", handler))
@@ -35,7 +35,7 @@ func main() {
 	handleRequests()
 }
 
-func home_page(w http.ResponseWriter, r *http.Request) {
+func homePage(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "please use a POST method", http.StatusNotFound)
 }
 func sha256(w http.ResponseWriter, r *http.Request) {
@@ -60,7 +60,7 @@ func sha256(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Accept", "application/json")
 		w.WriteHeader(http.StatusCreated)
 
-		json.NewEncoder(w).Encode(sha256ResponceBody{hex.EncodeToString(hasher.Sum(nil))})
+		_ = json.NewEncoder(w).Encode(sha256ResponceBody{hex.EncodeToString(hasher.Sum(nil))})
 	default:
 		http.Error(w, "please use a POST method", http.StatusMethodNotAllowed)
 	}
