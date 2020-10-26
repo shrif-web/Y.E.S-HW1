@@ -1,30 +1,67 @@
+package main
 
-func lineSenderResponse(w http.ResponseWriter, r *http.Request){
-	enableCors(&w)
-	//todo
+import (
+	"crypto"
+	"encoding/hex"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"strconv"
+
+	"github.com/rs/cors"
+)
+
+type sha256RequestBody struct {
+	First  string `json:"first"`
+	Second string `json:"second"`
 }
 
-func sha256Response(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
+type sha256ResponceBody struct {
+	Result string `json:"result"`
+}
+
+func handleRequests() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", home_page)
+	mux.HandleFunc("/go/sha256", sha256)
+	handler := cors.Default().Handler(mux)
+	log.Fatal(http.ListenAndServe(":8888", handler))
+
+}
+
+func main() {
+	handleRequests()
+}
+
+func home_page(w http.ResponseWriter, r *http.Request) {
+	http.Error(w, "please use a POST method", http.StatusNotFound)
+}
+func sha256(w http.ResponseWriter, r *http.Request) {
+	fmt.Print()
+
 	switch r.Method {
 	case "POST":
-		bod, err := ioutil.ReadAll(r.Body)
-		var nums DualNum
-		err = json.Unmarshal(bod, &nums)
+		b, err := ioutil.ReadAll(r.Body)
+		var operands sha256RequestBody
+		err = json.Unmarshal(b, &operands)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusBadRequest)
+			http.Error(w, err.Error(), 500)
 			return
 		}
-		log.Println("sum result = ", nums.A0 + nums.A1)
-		hasher := sha256.New()
-		hasher.Write([]byte(strconv.Itoa(nums.A0 + nums.A1)))
-		sha := hex.EncodeToString(hasher.Sum(nil))
-		fmt.Fprintf(w, "Result: %s", sha)
-	default:
-		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
-	}
-}
+		first, err := strconv.Atoi(operands.First)
+		second, err := strconv.Atoi(operands.Second)
+		result := []byte(strconv.Itoa(first + second))
+		hasher := crypto.SHA256.New()
+		hasher.Write(result)
 
-func enableCors(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Accept", "application/json")
+		w.WriteHeader(http.StatusCreated)
+
+		json.NewEncoder(w).Encode(sha256ResponceBody{hex.EncodeToString(hasher.Sum(nil))})
+	default:
+		http.Error(w, "please use a POST method", http.StatusMethodNotAllowed)
+	}
 }
