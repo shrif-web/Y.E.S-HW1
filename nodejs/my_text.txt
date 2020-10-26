@@ -1,0 +1,100 @@
+1	Fullmetal Alchemist (TV)	8.73	13438
+2	Death Note (TV)	8.86	12917
+3	Cowboy Bebop (TV)	8.93	12247
+4	Spirited Away (movie)	8.97	10548
+5	Princess Mononoke (movie)	8.93	9838
+6	(The) Melancholy of Haruhi Suzumiya (TV)	8.56	10176
+7	Elfen Lied (TV)	8.30	10468
+8	Neon Genesis Evangelion (TV)	8.32	10236
+9	Code Geass: Lelouch of the Rebellion (TV)	8.85	9185
+10	Bleach (TV)	7.95	9173
+11	FLCL (OAV)	8.18	8704
+12	Code Geass: Lelouch of the Rebellion R2 (TV)	9.02	7871
+13	Naruto (TV)	7.52	9305
+14	Samurai Champloo (TV)	8.53	7954
+15	Trigun (TV)	8.37	7993
+16	Gurren Lagann (TV)	8.73	6978
+17	Rurouni Kenshin: Trust & Betrayal (OAV)	8.92	6651
+18	Howl's Moving Castle (movie)	8.62	6834
+19	Full Metal Panic! (TV)	8.13	7229
+20	Ouran High School Host Club (TV)	8.53	6723
+21	Clannad (TV)	8.60	6220
+22	Fullmetal Alchemist: Brotherhood (TV)	9.11	5820
+23	Fruits Basket (TV)	8.14	6376
+24	Akira (movie)	7.95	6418
+25	Chobits (TV)	7.64	6663
+26	Cowboy Bebop: The Movie	8.44	6022
+27	Full Metal Panic? Fumoffu (TV)	8.40	6041
+28	5 Centimeters Per Second (movie)	8.69	5781
+29	Rurouni Kenshin (TV)	8.36	5965
+30	(The) Girl Who Leapt Through Time (movie)	8.67	5539
+31	Ghost in the Shell (movie)	8.22	5795
+32	Hellsing (TV)	7.65	6159
+33	Final Fantasy VII: Advent Children (movie)	8.01	5880
+34	Azumanga Daioh (TV)	8.38	5561
+35	Clannad After Story (TV)	8.95	5181
+36	Fullmetal Alchemist: The Movie - Conqueror of Shamballa	8.00	5673
+37	Ghost in the Shell: Stand Alone Complex (TV)	8.51	5185
+38	Nausicaä of the Valley of the Wind (movie)	8.68	5070
+39	Mushi-Shi (TV)	8.80	4996
+40	Darker than Black (TV)	8.30	5287
+41	Fate/stay night (TV)	7.52	5830
+42	Claymore (TV)	8.17	5296
+43	Steins;Gate (TV)	9.14	4665
+44	Inuyasha (TV)	7.29	5844
+45	Full Metal Panic! The Second Raid (TV)	8.43	4993
+46	Toradora! (TV)	8.48	4961
+47	Castle in the Sky (movie)	8.53	4890
+48	Black Lagoon (TV)	8.30	5022
+49	Blood+ (TV)	7.98	5214
+50	Angel Beats! (TV)	8.55	4797
+51	Neon Genesis Evangelion: The End of Evangelion (movie)	8.33	4904
+52	My Neighbor Totoro (movie)	8.65	4687
+53	Dragon Ball Z (TV)	7.17	5595
+54	Grave of the Fireflies (movie)	8.71	4595
+55	Eureka Seven (TV)	8.30	4732
+56	Air (TV)	7.95	4885
+57	Love Hina (TV)	7.41	5211
+58	Berserk (TV)	8.45	4513
+59	Last Exile (TV)	8.32	4514
+60	When They Cry - Higurashi (TV)	8.09	4601
+61	GTO: Great Teacher Onizuka (TV)	8.66	4223
+62	Baccano! (TV)	8.67	4198
+63	Wolf's Rain (TV)	7.95	4501
+64	Welcome to the NHK (TV)	8.50	4134
+65	Shakugan no Shana (TV)	8.02	4369
+66	Serial Experiments Lain (TV)	7.89	4422
+67	Sword Art Online (TV)	7.35	4736
+68	Haibane Renmei (TV)	8.48	4085
+69	Kiki's Delivery Service (movie)	8.28	4077
+70	Naruto Shippūden (TV)	7.89	4270
+71	(The) Vision of Escaflowne (TV)	8.08	4137
+72	Attack on Titan (TV)	8.32	3987
+73	Samurai 7 (TV)	8.16	4016
+74	One Piece (TV)	8.16	3998
+75	Soul Eater (TV)	8.13	3948
+76	School Rumble (TV)	8.24	3880
+77	Ergo Proxy (TV)	7.99	4002
+78	Spice and Wolf (TV)	8.38	3806
+79	Black Lagoon: The Second Barrage (TV)	8.44	3775
+80	Lucky Star (TV)	8.01	3971
+81	Eden of the East (TV)	8.38	3774
+82	Kanon (TV 2/2006)	8.64	3644
+83	Gungrave (TV)	8.35	3736
+84	Dragon Ball (TV)	7.27	4234
+85	Monster (TV)	8.76	3475
+86	Puella Magi Madoka Magica (TV)	8.62	3532
+87	High School of the Dead (TV)	7.54	3986
+88	Chrono Crusade (TV)	7.76	3838
+89	Summer Wars (movie)	8.74	3400
+90	Bakemonogatari (TV)	8.34	3510
+91	Gunslinger Girl (TV)	7.94	3648
+92	anohana: The Flower We Saw That Day (TV)	8.79	3241
+93	Lunar Legend Tsukihime (TV)	8.05	3532
+94	(The) Familiar of Zero (TV)	7.77	3652
+95	R.O.D -The TV-	8.35	3394
+96	Read or Die (OAV)	8.05	3514
+97	Yu Yu Hakusho: Ghost Files (TV)	8.09	3469
+98	Mobile Suit Gundam Seed (TV)	8.09	3458
+99	Durarara!! (TV)	8.06	3425
+100	Paranoia Agent (TV)	7.88	3497
