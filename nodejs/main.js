@@ -13,6 +13,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/nodejs/sha256', function (req, res) {
   console.log("request body:", req.body);
+  if (isNaN(Number(req.body.first) + Number(req.body.second))){
+    res.json({
+      error: "input integer number please"
+    });
+    return
+  }
+  console.log(Number(req.body.second))
   res.json({
     result: sha256((Number(req.body.first) + Number(req.body.second)).toString())
   });
@@ -26,9 +33,9 @@ app.get('/nodejs/write', function (req, res) {
     });
     return
   }
-  var kharkir = fs.readFileSync('my_text.txt', 'utf8') 
+  var kharkir = fs.readFileSync('my_text.txt', 'utf8')
   res.json({
-    result: kharkir.split("\n")[req.body.number-1]
+    result: kharkir.split("\n")[req.body.number - 1]
   });
 });
 
