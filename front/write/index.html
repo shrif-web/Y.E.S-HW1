@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Y.E.S.</title>
+</head>
+
+<script type="text/javascript">
+
+    function string2Bin(str) {
+        var result = [];
+        for (var i = 0; i < str.length; i++) {
+            result.push(str.charCodeAt(i).toString(2));
+        }
+        return result;
+    }
+
+    async function write_go() {
+        const line_number = document.getElementById("line_number").value;
+        const rawResponse = await fetch(
+            `http://localhost:8888/go/write?number=${line_number}`,
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+        const content = await rawResponse.text()
+        document.getElementById("line").innerText = content;
+    }
+
+    async function write_nodejs() {
+        const line_number = document.getElementById("line_number").value;
+        const rawResponse = await fetch(
+            `http://localhost:8080/nodejs/write?number=${line_number}`,
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+        const content = await rawResponse.text()
+        document.getElementById("line").innerText = content;
+    }
+
+
+</script>
+
+<body>
+    <input type="input" id="line_number" placeholder="enter line number ..." />
+    <button onclick="write_nodejs()">nodejs</button>
+    <button onclick="write_go()">go</button>
+    <p id="line"></p>
+</body>
+
+</html>

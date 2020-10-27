@@ -13,30 +13,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/nodejs/sha256', function (req, res) {
   console.log("request body:", req.body);
-  if (isNaN(Number(req.body.first) + Number(req.body.second))){
-    res.json({
-      error: "input integer number please"
-    });
+  if (isNaN(Number(req.body.first) + Number(req.body.second))) {
+    res.status(401).send("input integer number please")
     return
   }
-  console.log(Number(req.body.second))
-  res.json({
-    result: sha256((Number(req.body.first) + Number(req.body.second)).toString())
-  });
+  res.send(sha256((Number(req.body.first) + Number(req.body.second)).toString()))
 });
 
 app.get('/nodejs/write', function (req, res) {
-  console.log("request body:", req.body);
-  if (!(req.body.number > 0 && req.body.number <= 100)) {
-    res.json({
-      error: "input number range should be between 1-100"
-    });
+  console.log("request line number:", req.query.number);
+  if (!(req.query.number > 0 && req.query.number <= 100)) {
+    res.status(401).send("input number range should be between 1-100")
     return
   }
-  var kharkir = fs.readFileSync('my_text.txt', 'utf8')
-  res.json({
-    result: kharkir.split("\n")[req.body.number - 1]
-  });
+  var str = fs.readFileSync('my_text.txt', 'utf8')
+  res.send(str.split("\n")[req.query.number - 1])
 });
 
 

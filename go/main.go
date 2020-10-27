@@ -7,12 +7,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/rs/cors"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/rs/cors"
 )
 
 type sha256RequestBody struct {
@@ -81,7 +82,7 @@ func write(w http.ResponseWriter, r *http.Request) {
 
 	number, _ := strconv.Atoi(r.URL.Query().Get("number"))
 
-	line,err := readFile(number)
+	line, err := readFile(number)
 	if err != nil {
 		http.Error(w, "please enter a valid number", http.StatusMethodNotAllowed)
 		return
