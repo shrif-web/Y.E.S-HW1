@@ -3,6 +3,7 @@
 SERVER_IP_ADDRESS=$1
 
 ########################## nginx ####################################
+yum update
 yum install epel-release
 yum install nginx
 cp nginx/www.yes.io.conf /etc/nginx/conf.d/
