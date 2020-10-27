@@ -9,20 +9,3 @@ Group=root
 ExecStart=nodejs /opt/Y.E.S-HW1/nodejs/main.js
 ExecStop=/usr/bin/kill -9 $(ps -aux | grep main.js | awk '{print$2}' | head -n 1)
 ExecStartPre=/usr/bin/chmod +x /opt/Y.E.S-HW1/nodejs/main.js
-PermissionsStartOnly=true
-# cpu time
-LimitCPU=infinity
-# virtual memory size
-LimitAS=infinity
-# open files
-LimitNOFILE=64000
-# processes/threads
-LimitNPROC=64000
-# locked memory
-LimitMEMLOCK=infinity
-# total threads (user+kernel)
-TasksMax=infinity
-TasksAccounting=false
-TimeoutSec=90000
-[Install]
-WantedBy=multi-user.target

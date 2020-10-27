@@ -3,18 +3,18 @@
 SERVER_IP_ADDRESS=$1
 
 ########################## nginx ####################################
-yum update
+yum update -y
 yum install epel-release -y
 yum install nginx -y
 cp nginx/www.yes.io.conf /etc/nginx/conf.d/
 
 ########################## install nodejs & yarn ####################
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
-yum install nodejs
+yum install nodejs -y
 
 curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo
 rpm --import https://dl.yarnpkg.com/rpm/pubkey.gpg
-yum install yarn
+yum install yarn -y
 
 ########################## firewall #################################
 firewall-cmd --permanent --zone=public --add-service=http
