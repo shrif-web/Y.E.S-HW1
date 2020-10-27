@@ -24,12 +24,16 @@ firewall-cmd --reload
 setenforce 0
 
 ######################### service files #############################
-cp go-server.service /etc/systemd/system/multi-user.target.wants/
-cp nodejs-server.service /etc/systemd/system/multi-user.target.wants/
-
-
+cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
+cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
 
 ######################## running ####################################
+systemctl daemon-reload
 systemctl enable nginx
+systemctl enable go-server
+systemctl enable nodejs-server
+
+systemctl start go-server
+systemctl start nodejs-server
 systemctl start nginx
 
