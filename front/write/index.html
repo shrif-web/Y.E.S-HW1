@@ -18,7 +18,7 @@
     async function write_go() {
         const line_number = document.getElementById("line_number").value;
         const rawResponse = await fetch(
-            `http://localhost:8888/go/write?number=${line_number}`,
+            `http://yes.io/go/write?number=${line_number}`,
             {
                 method: "GET",
                 headers: {
@@ -34,7 +34,7 @@
     async function write_nodejs() {
         const line_number = document.getElementById("line_number").value;
         const rawResponse = await fetch(
-            `http://localhost:8080/nodejs/write?number=${line_number}`,
+            `http://yes.io/nodejs/write?number=${line_number}`,
             {
                 method: "GET",
                 headers: {
