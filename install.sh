@@ -24,7 +24,8 @@ firewall-cmd --reload
 setenforce 0
 
 ######################### service files #############################
-cp /etc/systemd/system/
+cp go-server.service /etc/systemd/system/multi-user.target.wants/
+cp nodejs-server.service /etc/systemd/system/multi-user.target.wants/
 
 
 
