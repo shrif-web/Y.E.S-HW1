@@ -4,8 +4,8 @@ SERVER_IP_ADDRESS=$1
 
 ########################## nginx ####################################
 yum update
-yum install epel-release
-yum install nginx
+yum install epel-release -y
+yum install nginx -y
 cp nginx/www.yes.io.conf /etc/nginx/conf.d/
 
 ########################## install nodejs & yarn ####################
