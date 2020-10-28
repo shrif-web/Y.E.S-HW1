@@ -35,8 +35,10 @@ ln -s $PWD/go/main /usr/bin/go-server
 sed "1 i\\#!$NODE_PATH " -i nodejs/main.js
 chmod +x nodejs/main.js
 ln -s $PWD/nodejs/main.js /usr/bin/node-server
+
 cd nodejs
-yarn install
+  yarn install
+cd ..
 
 cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
 cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
