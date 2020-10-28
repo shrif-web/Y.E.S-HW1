@@ -27,7 +27,7 @@ app.get('/nodejs/write', function (req, res) {
     res.status(401).send("input number range should be between 1-100")
     return
   }
-  var str = fs.readFileSync('nodejs/my_text.txt', 'utf8')
+  var str = fs.readFileSync('my_text.txt', 'utf8')
   res.send(str.split("\n")[req.query.number - 1])
 });
 
