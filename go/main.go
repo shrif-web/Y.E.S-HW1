@@ -56,7 +56,7 @@ func readFile(lineNumber int) (string, error) {
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println("path:"+path)  // for example /home/user
+	log.Println("path is :==>"+path)  // for example /home/user
 	file, err := os.Open("test.txt")
 	if err != nil {
 		log.Printf("failed opening file: %s", err)
