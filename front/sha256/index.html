@@ -1,66 +1,124 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Y.E.S.</title>
+    <title>Y.E.S.</title>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 </head>
 
 <script type="text/javascript">
-
-  function string2Bin(str) {
-    var result = [];
-    for (var i = 0; i < str.length; i++) {
-      result.push(str.charCodeAt(i).toString(2));
+    function string2Bin(str) {
+        var result = [];
+        for (var i = 0; i < str.length; i++) {
+            result.push(str.charCodeAt(i).toString(2));
+        }
+        return result;
     }
-    return result;
-  }
 
-  function submit_nodejs() {
-    (async () => {
-      const rawResponse = await fetch("http://localhost:8080/nodejs/sha256", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          first: document.getElementById("first_input").value,
-          second: document.getElementById("second_input").value
-        })
-      });
-      const content = await rawResponse.text();
-      document.getElementById("result").innerText = content;
-      console.log(content);
-    })();
-  }
+    function submit_nodejs() {
+        (async () => {
+            const rawResponse = await fetch("http://yes.io/nodejs/sha256", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    first: document.getElementById("first_input").value,
+                    second: document.getElementById("second_input").value
+                })
+            });
+            const content = await rawResponse.text();
+            document.getElementById("result").innerText = content;
+            console.log(content);
+        })();
+    }
 
-  function submit_go() {
-    (async () => {
-      const rawResponse = await fetch("http://localhost:8888/go/sha256", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          first: document.getElementById("first_input").value,
-          second: document.getElementById("second_input").value
-        })
-      });
-      const content = await rawResponse.json();
-      document.getElementById("result").innerText = content.result;
-      console.log(content);
-    })();
-  }
+    function submit_go() {
+        (async () => {
+            const rawResponse = await fetch("http://yes.io/go/sha256", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    first: document.getElementById("first_input").value,
+                    second: document.getElementById("second_input").value
+                })
+            });
+            const content = await rawResponse.json();
+            document.getElementById("result").innerText = content.result;
+            console.log(content);
+        })();
+    }
 </script>
 
 <body>
-  <input type="input" id="first_input" />
-  <input type="input" id="second_input" />
-  <button onclick="submit_nodejs()">nodejs</button>
-  <button onclick="submit_go()">go</button>
+<div
+        class="ui center aligned container segment"
+        style="width: 50%; margin: 40px auto; height: 80%;"
+>
+    <div class="ui placeholder segment">
+        <div class="ui two column very relaxed stackable grid">
+            <div class="column">
+                <div class="ui segment">
+                    <div class="ui fluid labeled input">
+                        <div class="ui label">
+                            1
+                        </div>
+                        <input
+                                type="text"
+                                id="first_input"
+                                placeholder="Enter first number"
+                        />
+                    </div>
+                    <div
+                            class="ui fluid labeled input"
+                            style="margin-top: 10px; margin-bottom: 10px;"
+                    >
+                        <div class="ui label">
+                            2
+                        </div>
+                        <input
+                                type="text"
+                                id="second_input"
+                                placeholder="Enter second number"
+                        />
+                    </div>
+                    <div class="ui fluid buttons">
+                        <div class="ui blue inverted submit button" onclick="submit_go()">
+                            <i class="digital ocean icon"></i>
+                            go
+                        </div>
+                        <div class="or"></div>
+                        <div class="ui green inverted submit button" onclick="submit_nodejs()">
+                            <i class="node js icon"></i>
+                            nodejs
+                        </div>
+                    </div>
+                </div>
 
-  <p id="result">nadarim agha</p>
+            </div>
+            <div class="middle aligned column">
+                <div class="ui big button">
+                    <i class="signup icon"></i>
+                    Write
+                </div>
+            </div>
+        </div>
+        <div class="ui vertical divider">
+            Or
+        </div>
+    </div>
+
+    <div class="ui fluid segment" id="result">
+        <p>nadarim agha</p>
+    </div>
+</div>
 </body>
-
 </html>

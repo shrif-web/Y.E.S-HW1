@@ -25,13 +25,8 @@ type sha256ResponseBody struct {
 	Result string `json:"result"`
 }
 
-func checkError(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
 func main() {
+
 	handleRequests("", 8888)
 }
 

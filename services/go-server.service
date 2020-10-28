@@ -1,0 +1,12 @@
+[Unit]
+Description=go server service file
+Documentation=https://github.com/ArshiAAkhavan/Y.E.S-HW1
+After=network.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/usr/bin/go-server
+ExecStop=/usr/bin/kill -9 $(ps -aux | grep go-server | awk '{print$2}' | head -n 1)
+ExecStartPre=/usr/bin/chmod +x /opt/Y.E.S-HW1/go/main
+
