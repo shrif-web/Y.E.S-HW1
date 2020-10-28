@@ -28,6 +28,10 @@ setenforce 0
 cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
 cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
 
+######################## yarn install ###############################
+cd nodejs
+yarn install
+
 ######################## running ####################################
 systemctl daemon-reload
 systemctl enable nginx
