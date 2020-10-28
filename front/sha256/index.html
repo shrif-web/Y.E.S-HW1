@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Y.E.S.</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
-
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 </head>
 
 <script type="text/javascript">
-
   function string2Bin(str) {
     var result = [];
     for (var i = 0; i < str.length; i++) {
@@ -59,12 +59,55 @@
 </script>
 
 <body>
-  <input type="input" id="first_input" />
-  <input type="input" id="second_input" />
-  <button onclick="submit_nodejs()" class="ui button">nodejs</button>
-  <button onclick="submit_go()" class="ui button">go</button>
+<div
+        class="ui center aligned container segment"
+        style="width: 50%; margin: 40px auto; height: 80%;"
+>
+  <div class="ui placeholder segment">
+    <div class="ui two column very relaxed stackable grid">
+      <div class="column">
+        <div class="ui form">
+          <div class="field">
+            <label>first</label>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Username" />
+              <i class="hand point left icon"></i>
+            </div>
+          </div>
+          <div class="field">
+            <label>second</label>
+            <div class="ui left icon input">
+              <input type="" />
+              <i class="hand scissors icon"></i>
+            </div>
+          </div>
 
-  <p id="result">nadarim agha</p>
+          <div class="ui buttons">
+            <div class="ui blue inverted submit button">
+              <i class="digital ocean icon"></i>
+              go
+            </div>
+            <div class="or"></div>
+            <div class="ui green inverted submit button">
+              <i class="node js icon"></i>
+              nodejs
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="middle aligned column">
+        <div class="ui big button">
+          <i class="signup icon"></i>
+          Sign Up
+        </div>
+      </div>
+    </div>
+    <div class="ui vertical divider">
+      Or
+    </div>
+  </div>
+
+  <p id="result" class="center">nadarim agha</p>
+</div>
 </body>
-
 </html>
