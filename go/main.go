@@ -57,7 +57,11 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func readFile(lineNumber int) (string, error) {
-	file, err := os.Open("test.txt")
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	file, err := os.Open(path+"test.txt")
 	if err != nil {
 		log.Printf("failed opening file: %s", err)
 	}
