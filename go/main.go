@@ -25,13 +25,8 @@ type sha256ResponseBody struct {
 	Result string `json:"result"`
 }
 
-func checkError(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
 func main() {
+
 	handleRequests("", 8888)
 }
 
@@ -57,11 +52,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func readFile(lineNumber int) (string, error) {
-	path, err := os.Getwd()
-	if err != nil {
-		log.Println(err)
-	}
-	file, err := os.Open(path+"test.txt")
+	file, err := os.Open("test.txt")
 	if err != nil {
 		log.Printf("failed opening file: %s", err)
 	}
