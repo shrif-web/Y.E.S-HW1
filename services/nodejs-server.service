@@ -6,6 +6,6 @@ After=network.target
 [Service]
 User=root
 Group=root
-ExecStart=node /opt/Y.E.S-HW1/nodejs/main.js
+ExecStart=/usr/bin/node /opt/Y.E.S-HW1/nodejs/main.js
 ExecStop=/usr/bin/kill -9 $(ps -aux | grep main.js | awk '{print$2}' | head -n 1)
 ExecStartPre=/usr/bin/chmod +x /opt/Y.E.S-HW1/nodejs/main.js
