@@ -52,11 +52,6 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func readFile(lineNumber int) (string, error) {
-	path, err := os.Getwd()
-	if err != nil {
-		log.Println(err)
-	}
-	log.Println("path:"+path)  // for example /home/user
 	file, err := os.Open("go/test.txt")
 	if err != nil {
 		log.Printf("failed opening file: %s", err)
