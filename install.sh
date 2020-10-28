@@ -40,8 +40,8 @@ cd nodejs
   yarn install
 cd ..
 
-sed "s/\(WorkingDirectory=<\)will_be_set>/\1$PWD/go/g" -i services/go-server.service
-sed "s/\(WorkingDirectory=<\)will_be_set>/\1$PWD/nodejs/g" -i services/nodejs-server.service
+sed "s/\(WorkingDirectory=\)<will_be_set>/\1$PWD\/go/g" -i services/go-server.service
+sed "s/\(WorkingDirectory=\)<will_be_set>/\1$PWD\/nodejs/g" -i services/nodejs-server.service
 
 cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
 cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
