@@ -3,9 +3,21 @@
 
 <head>
     <title>Y.E.S.</title>
+    <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
 </head>
 
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="../semantic/dist/semantic.min.js"></script>
+
 <script type="text/javascript">
+
+    function pausecomp(millis) {
+        var date = new Date();
+        var curDate = null;
+        do { curDate = new Date(); }
+        while (curDate - date < millis);
+    }
 
     function string2Bin(str) {
         var result = [];
@@ -16,6 +28,9 @@
     }
 
     async function write_go() {
+        document.getElementById("msgctn").innerHTML = '<div class="ui disabled loader" id="linectn"><div class="ui text loader">Connecting</div></div><p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>';
+        document.getElementById("gobtn").className = "ui loading button";
+        document.getElementById("linectn").className = "ui active inverted dimmer";
         const line_number = document.getElementById("line_number").value;
         const rawResponse = await fetch(
             `http://localhost:8888/go/write?number=${line_number}`,
@@ -27,11 +42,26 @@
                 }
             }
         );
+        if (rawResponse.status != 200 && rawResponse.status != 405) {
+            setTimeout(() => document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (404)</div><p = "line">cannot connecting to server</p></div>', 3000);
+            setTimeout(() => document.getElementById("gobtn").className = "ui button", 3000);
+            return
+        }
         const content = await rawResponse.text()
+        if (rawResponse.status != 200) {
+            document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (' + rawResponse.status + ')</div><p = "line">' + content + '</p></div>';
+            document.getElementById("gobtn").className = "ui button"
+            return
+        }
+        document.getElementById("gobtn").className = "ui button"
+        document.getElementById("linectn").className = "ui disabled loader"
         document.getElementById("line").innerText = content;
     }
 
     async function write_nodejs() {
+        document.getElementById("msgctn").innerHTML = '<div class="ui disabled loader" id="linectn"><div class="ui text loader">Connecting</div></div><p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>';
+        document.getElementById("nodebtn").className = "ui loading button";
+        document.getElementById("linectn").className = "ui active inverted dimmer";
         const line_number = document.getElementById("line_number").value;
         const rawResponse = await fetch(
             `http://localhost:8080/nodejs/write?number=${line_number}`,
@@ -43,18 +73,61 @@
                 }
             }
         );
+        if (rawResponse.status != 200 && rawResponse.status != 401) {
+            setTimeout(() => document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (404)</div><p = "line">cannot connecting to server</p></div>', 3000);
+            setTimeout(() => document.getElementById("nodebtn").className = "ui button", 3000);
+            return
+        }
         const content = await rawResponse.text()
+        if (rawResponse.status != 200) {
+            document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (' + rawResponse.status + ')</div><p = "line">' + content + '</p></div>';
+            document.getElementById("nodebtn").className = "ui button"
+            return
+        }
+        document.getElementById("nodebtn").className = "ui button"
+        document.getElementById("linectn").className = "ui disabled loader"
         document.getElementById("line").innerText = content;
     }
-
 
 </script>
 
 <body>
-    <input type="input" id="line_number" placeholder="enter line number ..." />
-    <button onclick="write_nodejs()">nodejs</button>
-    <button onclick="write_go()">go</button>
-    <p id="line"></p>
+    <div style="width: 50%; height: 30%; margin-left: 25%; margin-top: 15%; position: relative;">
+        <div class="ui raised segment">
+            <div class="ui two column stackable center aligned grid">
+                <div class="middle aligned row" style="margin-right: 37%;">
+                    <div class="column">
+                        <div class="ui vertical pointing menu" style="float: right;">
+                            <a class="item">
+                                Give Me Sum In SHA-256
+                            </a>
+                            <a class="item active">
+                                What Was That Line ?
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="ui segment" style="float:left; width: 233%; height: 200px;">
+                            <div class="ui input" style="float:left; width: 63%; height: 20%;">
+                                <input id="line_number" type="text" placeholder="enter line number ...">
+                            </div>
+                            <div class="ui small buttons" style="float: left; padding-left: 2%;">
+                                <button onclick="write_nodejs()" class="ui button" id="nodebtn">nodejs</button>
+                                <div class="or"></div>
+                                <button onclick="write_go()" class="ui button" id="gobtn">golang</button>
+                            </div>
+                            <div class="ui tall stacked segment" style="margin-top: 10%; height: 73%;" id="msgctn">
+                                <div class="ui disabled loader" id="linectn">
+                                    <div class="ui text loader">Connecting</div>
+                                </div>
+                                <p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
