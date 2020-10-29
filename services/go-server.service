@@ -6,10 +6,10 @@ After=network.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=<will_be_set>
+WorkingDirectory=<path_to_binary>
 ExecStart=/usr/bin/go-server
 ExecStop=/usr/bin/kill -9 $(ps -aux | grep go-server | awk '{print$2}' | head -n 1)
-ExecStartPre=/usr/bin/chmod +x /opt/Y.E.S-HW1/go/main
+ExecStartPre=/usr/bin/chmod +x <path_to_binary>
 
 [Install]
 WantedBy=multi-user.target
