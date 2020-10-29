@@ -6,7 +6,7 @@ SERVER_IP_ADDRESS=$1
 yum update -y
 yum install epel-release -y
 yum install nginx -y
-cp nginx/www.yes.io.conf /etc/nginx/conf.d/
+sed "s@<path_to_front>@$(pwd)\/front@gm" nginx/www.yes.io.conf > /etc/nginx/conf.d/
 
 ########################## install nodejs & yarn ####################
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
@@ -39,8 +39,8 @@ cd nodejs
   yarn install
 cd ..
 
-sed "s@<path_to_binary>@$(pwd)\/go@gm" -i services/go-server.service > /etc/systemd/system/multi-user.target.wants/go-server.service
-sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" -i services/nodejs-server.service > /etc/systemd/system/multi-user.target.wants/nodejs-server.service
+sed "s@<path_to_binary>@$(pwd)\/go@gm" services/go-server.service > /etc/systemd/system/multi-user.target.wants/go-server.service
+sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" services/nodejs-server.service > /etc/systemd/system/multi-user.target.wants/nodejs-server.service
 
 #cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
 #cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
