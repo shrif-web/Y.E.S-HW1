@@ -53,8 +53,8 @@ systemctl enable nginx
 systemctl enable go-server
 systemctl enable nodejs-server
 
-systemctl start go-server
-systemctl start nodejs-server
-systemctl start nginx
+systemctl restart go-server
+systemctl restart nodejs-server
+systemctl restart nginx
 
 nginx -s reload
