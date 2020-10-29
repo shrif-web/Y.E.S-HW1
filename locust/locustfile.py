@@ -1,20 +1,22 @@
 import time
-from locust import HttpUser, task, between
+from locust import HttpUser, task, constant
 
-class QuickstartUser(HttpUser):
-    wait_time = between(1, 2)
-
+class GoUser(HttpUser):
+    wait_time = constant(0.5)
     @task
-    def index_page(self):
+    def sha(self):
         self.client.post("/go/sha256", json={"first":"2", "second":"3"})
-        # self.client.get("")
-#         self.client.get("/world")
+    @task
+    def write(self):
+        self.client.get("/go/write?number=1")
 
-#     @task(3)
-#     def view_item(self):
-#         for item_id in range(10):
-#             self.client.get(f"/item?id={item_id}", name="/item")
-#             time.sleep(1)
 
-#     def on_start(self):
-#         self.client.post("/login", json={"username":"foo", "password":"bar"})
+class NodeUser(HttpUser):
+    wait_time = constant(0.5)
+    @task
+    def sha(self):
+        self.client.post("/nodejs/sha256", json={"first":"2", "second":"3"})
+    @task
+    def write(self):
+        self.client.get("/nodejs/write?number=1")
+
