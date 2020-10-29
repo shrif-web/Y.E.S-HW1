@@ -6,7 +6,7 @@ SERVER_IP_ADDRESS=$1
 yum update -y
 yum install epel-release -y
 yum install nginx -y
-sed "s@<path_to_front>@$(pwd)\/front@gm" nginx/www.yes.io.conf > /etc/nginx/conf.d/
+sed "s@<path_to_front>@$(pwd)\/front@gm" nginx/www.yes.io.conf > /etc/nginx/conf.d/www.yes.io.conf
 
 ########################## install nodejs & yarn ####################
 curl -sL https://rpm.nodesource.com/setup_10.x | bash -
