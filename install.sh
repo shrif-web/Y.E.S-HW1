@@ -57,3 +57,4 @@ systemctl start go-server
 systemctl start nodejs-server
 systemctl start nginx
 
+nginx -s reload
