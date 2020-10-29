@@ -1,9 +1,63 @@
 <html>
-    <head>
-        <title>Y.E.S. main page</title>
-    </head>
-    <body>
-        <button onclick="location.href = 'sha256';">sha256</button>
-        <button onclick="location.href = 'write';">write</button>
-    </body>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <title>Y.E.S. main page</title>
+    <script
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="split left" id="left">
+        <!-- <h1>The Designer</h1>
+        <a href="#" class="button">Read More</a> -->
+
+        <!-- <div data-include="header"></div> -->
+
+        <!-- <div class="writeContent"></div> -->
+      </div>
+      <div class="split right">
+        <h1>The Programmer</h1>
+        <a href="#" class="button">Read More</a>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    // $(function() {
+    //   var includes = $("[data-include]");
+    //   jQuery.each(includes, function() {
+    //     var file = "write/index.html";
+    //     $(this).load(file);
+    //   });
+    // });
+
+    // console.log("------", document.querySelector(".writeContent"))
+
+    const left = document.querySelector(".left");
+    const right = document.querySelector(".right");
+    const container = document.querySelector(".container");
+
+    left.addEventListener("mouseenter", () => {
+      container.classList.add("hover-left");
+    });
+
+    left.addEventListener("mouseleave", () => {
+      container.classList.remove("hover-left");
+    });
+
+    right.addEventListener("mouseenter", () => {
+      container.classList.add("hover-right");
+    });
+
+    right.addEventListener("mouseleave", () => {
+      container.classList.remove("hover-right");
+    });
+  </script>
 </html>
