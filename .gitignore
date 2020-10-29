@@ -172,3 +172,6 @@ front/semantic
 go/go.sum
 go/go.mod
 
+#js
+nodejs/package-lock.json
+
