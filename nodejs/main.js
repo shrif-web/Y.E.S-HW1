@@ -22,6 +22,7 @@ app.post('/nodejs/sha256', function (req, res) {
 
 app.get('/nodejs/write', function (req, res) {
   console.log("request line number:", req.query.number);
+  console.log("path:"+process.cwd())
   if (!(req.query.number > 0 && req.query.number <= 100)) {
     res.status(401).send("input number range should be between 1-100")
     return
