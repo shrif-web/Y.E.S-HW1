@@ -47,6 +47,7 @@ sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" OS/services/nodejs-server.service > /
 
 ######################## sysctl #####################################
 cp OS/sysctl.conf /etc/sysctl.conf
+sysctl -p
 ######################## running ####################################
 systemctl daemon-reload
 systemctl enable nginx
