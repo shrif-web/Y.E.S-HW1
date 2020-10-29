@@ -6,7 +6,8 @@ class QuickstartUser(HttpUser):
 
     @task
     def index_page(self):
-        self.client.get("http://yes.io")
+        self.client.post("/go/sha256", json={"first":"2", "second":"3"})
+        # self.client.get("")
 #         self.client.get("/world")
 
 #     @task(3)
