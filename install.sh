@@ -39,8 +39,8 @@ cd nodejs
   yarn install
 cd ..
 
-sed "s@<path_to_binary>@$(pwd)\/go@gm" services/go-server.service > /usr/lib/systemd/system/multi-user.target.wants/go-server.service
-sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" services/nodejs-server.service > /usr/lib/systemd/system/multi-user.target.wants/nodejs-server.service
+sed "s@<path_to_binary>@$(pwd)\/go@gm" services/go-server.service > /lib/systemd/system/multi-user.target.wants/go-server.service
+sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" services/nodejs-server.service > /lib/systemd/system/multi-user.target.wants/nodejs-server.service
 
 #cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
 #cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
