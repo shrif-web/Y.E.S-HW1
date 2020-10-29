@@ -175,3 +175,6 @@ go/go.mod
 #js
 nodejs/package-lock.json
 
+#python
+venv/*
+
