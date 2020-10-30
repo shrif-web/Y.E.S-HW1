@@ -11,14 +11,6 @@
   </head>
 
   <script type="text/javascript">
-    function string2Bin(str) {
-      var result = [];
-      for (var i = 0; i < str.length; i++) {
-        result.push(str.charCodeAt(i).toString(2));
-      }
-      return result;
-    }
-
     function submit_nodejs() {
       (async () => {
         const rawResponse = await fetch("http://yes.io/nodejs/sha256", {
@@ -40,6 +32,7 @@
 
     function submit_go() {
       (async () => {
+        console.log("here")
         const rawResponse = await fetch("http://yes.io/go/sha256", {
           method: "POST",
           headers: {
@@ -52,6 +45,7 @@
           })
         });
         const content = await rawResponse.json();
+        console.log("---- result:", content)
         document.getElementById("result").innerText = content.result;
         console.log(content);
       })();
@@ -60,69 +54,76 @@
 
   <body>
     <div
-      class="ui center aligned container segment"
-      style="width: 50%; margin: 40px auto; height: 80%;"
+      class="ui center aligned container "
+      style="width: 35%; margin: 40px auto; height: 80%;"
     >
-      <div class="ui placeholder segment">
-        <div class="ui two column very relaxed stackable grid">
-          <div class="column">
-            <div class="ui segment">
-              <div class="ui fluid labeled input">
-                <div class="ui label">
-                  1
-                </div>
-                <input
-                  type="text"
-                  id="first_input"
-                  placeholder="Enter first number"
-                />
-              </div>
-              <div
-                class="ui fluid labeled input"
-                style="margin-top: 10px; margin-bottom: 10px;"
-              >
-                <div class="ui label">
-                  2
-                </div>
-                <input
-                  type="text"
-                  id="second_input"
-                  placeholder="Enter second number"
-                />
-              </div>
-              <div class="ui fluid buttons">
-                <div
-                  class="ui blue inverted submit button"
-                  onclick="submit_go()"
-                >
-                  <i class="digital ocean icon"></i>
-                  go
-                </div>
-                <div class="or"></div>
-                <div
-                  class="ui green inverted submit button"
-                  onclick="submit_nodejs()"
-                >
-                  <i class="node js icon"></i>
-                  nodejs
-                </div>
-              </div>
-            </div>
+      <div class="ui placeholder segment left aligned">
+        <!-- <div class="ui two column very relaxed stackable grid"> -->
+        <div class="ui segment">
+          <!-- <div class="ui segment"> -->
+          <div class="ui message fluid" style="margin-bottom: 10px;">
+            <p>Enter 2 numbers to get their sum in SHA256 format!</p>
           </div>
-          <div class="middle aligned column">
+          <div class="ui fluid labeled input">
+            <div class="ui label">
+              1
+            </div>
+            <input
+              type="text"
+              id="first_input"
+              placeholder="Enter first number"
+            />
+          </div>
+          <div
+            class="ui fluid labeled input"
+            style="margin-top: 10px; margin-bottom: 10px;"
+          >
+            <div class="ui label">
+              2
+            </div>
+            <input
+              type="text"
+              id="second_input"
+              placeholder="Enter second number"
+            />
+          </div>
+          <div class="ui fluid buttons">
+            <div class="ui blue inverted submit button" onclick="submit_go()">
+              <i class="digital ocean icon"></i>
+              go
+            </div>
+            <div class="or"></div>
+            <div
+              class="ui green inverted submit button"
+              onclick="submit_nodejs()"
+            >
+              <i class="node js icon"></i>
+              nodejs
+            </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <!-- <div class="middle aligned column">
             <div class="ui big button">
               <i class="signup icon"></i>
               Write
             </div>
-          </div>
-        </div>
-        <div class="ui vertical divider">
+          </div> -->
+        <!-- </div> -->
+        <!-- <div class="ui vertical divider">
           Or
-        </div>
+        </div> -->
       </div>
 
-      <div class="ui fluid segment" id="result">
+      <!-- <div class="ui fluid segment" id="result">
         <p>nadarim agha</p>
+      </div> -->
+
+      <div class="ui icon message">
+        <i class="edit icon"></i>
+        <div class="header">
+          <p id="result">Result is ...</p>
+        </div>
       </div>
     </div>
   </body>
