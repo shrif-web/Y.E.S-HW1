@@ -27,10 +27,10 @@ setenforce 0
 ######################### service files #############################
 NODE_PATH=$(which node)
 
-######################## go
+######################## config::go-server ##########################
 chmod +x go/main
 ln -s $(pwd)/go/main /usr/bin/go-server
-####################### nodejs
+####################### config::nodejs ##############################
 sed "1 i\\#!$NODE_PATH " -i nodejs/main.js
 chmod +x nodejs/main.js
 ln -s $(pwd)/nodejs/main.js /usr/bin/node-server
@@ -39,14 +39,15 @@ cd nodejs
   yarn install
 cd ..
 
-sed "s@<path_to_binary>@$(pwd)\/go@gm" services/go-server.service > /usr/lib/systemd/system/multi-user.target.wants/go-server.service
-sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" services/nodejs-server.service > /usr/lib/systemd/system/multi-user.target.wants/nodejs-server.service
+sed "s@<path_to_binary>@$(pwd)\/go@gm" OS/services/go-server.service > /lib/systemd/system/multi-user.target.wants/go-server.service
+sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" OS/services/nodejs-server.service > /lib/systemd/system/multi-user.target.wants/nodejs-server.service
 
 #cp services/go-server.service /etc/systemd/system/multi-user.target.wants/
 #cp services/nodejs-server.service /etc/systemd/system/multi-user.target.wants/
 
-######################## yarn install ###############################
-
+######################## sysctl #####################################
+cp OS/sysctl.conf /etc/sysctl.conf
+sysctl -p
 ######################## running ####################################
 systemctl daemon-reload
 systemctl enable nginx
