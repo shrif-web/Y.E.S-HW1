@@ -91,6 +91,7 @@ func write(w http.ResponseWriter, r *http.Request) {
 }
 
 func sha256(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("salam")
 	switch r.Method {
 	case "POST":
 		b, err := ioutil.ReadAll(r.Body)
