@@ -94,14 +94,11 @@
 
 <body style="background-image: url('../nami2X.png'); background-repeat: repeatback">
     <div class="ui center aligned container segment"
-        style="width: 780px; height: 230px; margin: 50px auto; background-image: url('../swirl_pattern.png'); background-repeat: repeatback">
+        style="width: 55%; height: 230px; margin: 50px auto; background-image: url('../swirl_pattern.png'); background-repeat: repeatback">
         <div class="ui two column stackable center aligned grid">
             <div class="middle aligned row" style="margin-right: 37%;">
                 <div class="column">
                     <div class="ui inverted vertical pointing menu" style="float: right;">
-                        <a class="item">
-                            Give Me Sum In SHA-256
-                        </a>
                         <a class="item active">
                             What Was That Line ?
                         </a>
@@ -114,11 +111,12 @@
                             <input id="line_number" type="text" placeholder="enter line number ...">
                         </div>
                         <div class="ui small buttons" style="float: left; padding-left: 5%;">
-                            <button onclick="write_nodejs()" class="ui secondary button" id="nodebtn"
-                                style="background-color: #2a2b2a;">nodejs</button>
+                            <button onclick="write_nodejs()" class="ui inverted green button" id="nodebtn"
+                                
+                                >nodejs</button>
                             <div class="or"></div>
-                            <button onclick="write_go()" class="ui secondary button" id="gobtn"
-                                style="background-color: #2a2b2a;">golang</button>
+                            <button onclick="write_go()" class="ui inverted blue button" id="gobtn"
+                                >golang</button>
                         </div>
                         <div class="ui inverted segment" style="margin-top: 10%; height: 73%;" id="msgctn">
                             <div class="ui disabled loader" id="linectn">
@@ -135,3 +133,6 @@
 </body>
 
 </html>
+
+<!-- style="background-color: #2a2b2a;" -->
+<!-- style="background-color: #2a2b2a;" -->

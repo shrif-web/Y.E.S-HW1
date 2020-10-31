@@ -13,27 +13,36 @@
   <script type="text/javascript">
     function submit_nodejs() {
       (async () => {
-        const rawResponse = await fetch("http://yes.io/nodejs/sha256", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            first: document.getElementById("first_input").value,
-            second: document.getElementById("second_input").value
-          })
-        });
-        const content = await rawResponse.text();
-        document.getElementById("result").innerText = content;
-        console.log(content);
+        const rawResponse = await fetch(
+          "http://localhost:8080/nodejs/sha2566",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              Accept: "text/html",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              first: document.getElementById("first_input").value,
+              second: document.getElementById("second_input").value
+            })
+          }
+        );
+        const response = await rawResponse;
+        console.log("response:", response);
+        if (response.status == 404) {
+          // alert("Page not found!")
+        } else {
+          const content = await response.text();
+          document.getElementById("result").innerText = content;
+          console.log(content);
+        }
       })();
     }
 
     function submit_go() {
       (async () => {
-        console.log("here")
-        const rawResponse = await fetch("http://yes.io/go/sha256", {
+        const rawResponse = await fetch("http://localhost:8888/go/sha256", {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -45,7 +54,7 @@
           })
         });
         const content = await rawResponse.json();
-        console.log("---- result:", content)
+        console.log("---- result:", content);
         document.getElementById("result").innerText = content.result;
         console.log(content);
       })();
@@ -57,12 +66,13 @@
       class="ui center aligned container "
       style="width: 35%; margin: 40px auto; height: 80%;"
     >
-      <div class="ui placeholder segment left aligned">
-        <!-- <div class="ui two column very relaxed stackable grid"> -->
-        <div class="ui segment">
-          <!-- <div class="ui segment"> -->
-          <div class="ui message fluid" style="margin-bottom: 10px;">
-            <p>Enter 2 numbers to get their sum in SHA256 format!</p>
+      <div class="ui placeholder segment left aligned inverted">
+        <div class="ui segment inverted">
+          <div
+            class="ui message fluid"
+            style="margin-bottom: 10px;background-color:#d4d6d5"
+          >
+            <h5>Enter 2 numbers to get their sum in SHA256 format!</h5>
           </div>
           <div class="ui fluid labeled input">
             <div class="ui label">
@@ -87,41 +97,29 @@
               placeholder="Enter second number"
             />
           </div>
-          <div class="ui fluid buttons">
-            <div class="ui blue inverted submit button" onclick="submit_go()">
-              <i class="digital ocean icon"></i>
-              go
+
+          <div class="ui segment inverted center aligned">
+            <div class="ui fluid buttons">
+              <div
+                class="ui green inverted submit button"
+                onclick="submit_nodejs()"
+              >
+                <i class="node js icon"></i>
+                nodejs
+              </div>
+              <div class="or"></div>
+              <div class="ui blue inverted submit button" onclick="submit_go()">
+                <i class="digital ocean icon"></i>
+                golang
+              </div>
             </div>
-            <div class="or"></div>
-            <div
-              class="ui green inverted submit button"
-              onclick="submit_nodejs()"
-            >
-              <i class="node js icon"></i>
-              nodejs
-            </div>
-            <!-- </div> -->
           </div>
         </div>
-        <!-- <div class="middle aligned column">
-            <div class="ui big button">
-              <i class="signup icon"></i>
-              Write
-            </div>
-          </div> -->
-        <!-- </div> -->
-        <!-- <div class="ui vertical divider">
-          Or
-        </div> -->
       </div>
 
-      <!-- <div class="ui fluid segment" id="result">
-        <p>nadarim agha</p>
-      </div> -->
-
-      <div class="ui icon message">
+      <div class="ui icon inverted message" style="overflow: auto;">
         <i class="edit icon"></i>
-        <div class="header">
+        <div class="header" style="opacity: 0.5;">
           <p id="result">Result is ...</p>
         </div>
       </div>
