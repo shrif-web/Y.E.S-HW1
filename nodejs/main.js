@@ -45,7 +45,6 @@ app.use(function(req, res, next) {
     console.log("here2")
     // res.json({ message: `${req.method}: ${fullUrl(req)} is not supported!` });
   } else {
-    console.log("here3")
     res.status(404);
     res.type("txt").send("Not found");
   }

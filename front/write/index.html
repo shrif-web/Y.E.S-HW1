@@ -1,139 +1,203 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Y.E.S.</title>
     <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
-</head>
+  </head>
 
-<script type="text/javascript">
-
+  <script type="text/javascript">
     function pausecomp(millis) {
-        var date = new Date();
-        var curDate = null;
-        do { curDate = new Date(); }
-        while (curDate - date < millis);
+      var date = new Date();
+      var curDate = null;
+      do {
+        curDate = new Date();
+      } while (curDate - date < millis);
     }
 
     function string2Bin(str) {
-        var result = [];
-        for (var i = 0; i < str.length; i++) {
-            result.push(str.charCodeAt(i).toString(2));
-        }
-        return result;
+      var result = [];
+      for (var i = 0; i < str.length; i++) {
+        result.push(str.charCodeAt(i).toString(2));
+      }
+      return result;
     }
 
     async function write_go() {
-        document.getElementById("msgctn").innerHTML = '<div class="ui disabled loader" id="linectn"><div class="ui text loader">Connecting</div></div><p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>';
-        document.getElementById("gobtn").className = "ui secondary loading button";
-        document.getElementById("linectn").className = "ui active inverted dimmer";
-        const line_number = document.getElementById("line_number").value;
-        const rawResponse = await fetch(
-            `http://yes.io/go/write?number=${line_number}`,
-            {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
-            }
+      document.getElementById("msgctn").innerHTML =
+        '<div class="ui disabled loader" id="linectn"><div class="ui text loader">Connecting</div></div><p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>';
+      document.getElementById("gobtn").className =
+        "ui secondary loading button";
+      document.getElementById("linectn").className =
+        "ui active inverted dimmer";
+      const line_number = document.getElementById("line_number").value;
+      const rawResponse = await fetch(
+        `http://yes.io/go/write?number=${line_number}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      if (rawResponse.status != 200 && rawResponse.status != 405) {
+        setTimeout(
+          () =>
+            (document.getElementById("msgctn").innerHTML =
+              '<div class="ui red message"><div class="header">Server Error (404)</div><p = "line">cannot connecting to server</p></div>'),
+          3000
         );
-        if (rawResponse.status != 200 && rawResponse.status != 405) {
-            setTimeout(() => document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (404)</div><p = "line">cannot connecting to server</p></div>', 3000);
-            setTimeout(() => document.getElementById("gobtn").className = "ui secondary button", 3000);
-            return
-        }
-        const content = await rawResponse.text()
-        if (rawResponse.status != 200) {
-            document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (' + rawResponse.status + ')</div><p = "line">' + content + '</p></div>';
-            document.getElementById("gobtn").className = "ui secondary button"
-            return
-        }
-        document.getElementById("gobtn").className = "ui secondary button"
-        document.getElementById("linectn").className = "ui disabled loader"
-        document.getElementById("line").innerText = content;
+        setTimeout(
+          () =>
+            (document.getElementById("gobtn").className =
+              "ui secondary button"),
+          3000
+        );
+        return;
+      }
+      const content = await rawResponse.text();
+      if (rawResponse.status != 200) {
+        document.getElementById("msgctn").innerHTML =
+          '<div class="ui red message"><div class="header">Server Error (' +
+          rawResponse.status +
+          ')</div><p = "line">' +
+          content +
+          "</p></div>";
+        document.getElementById("gobtn").className = "ui secondary button";
+        return;
+      }
+      document.getElementById("gobtn").className = "ui secondary button";
+      document.getElementById("linectn").className = "ui disabled loader";
+      document.getElementById("line").innerText = content;
     }
 
     async function write_nodejs() {
-        document.getElementById("msgctn").innerHTML = '<div class="ui disabled loader" id="linectn"><div class="ui text loader">Connecting</div></div><p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>';
-        document.getElementById("nodebtn").className = "ui secondary loading button";
-        document.getElementById("linectn").className = "ui active inverted dimmer";
-        const line_number = document.getElementById("line_number").value;
-        const rawResponse = await fetch(
-            `http://yes.io/nodejs/write?number=${line_number}`,
-            {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
-            }
+      document.getElementById("msgctn").innerHTML =
+        '<div class="ui disabled loader" id="linectn"><div class="ui text loader">Connecting</div></div><p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>';
+      document.getElementById("nodebtn").className =
+        "ui secondary loading button";
+      document.getElementById("linectn").className =
+        "ui active inverted dimmer";
+      const line_number = document.getElementById("line_number").value;
+      const rawResponse = await fetch(
+        `http://yes.io/nodejs/write?number=${line_number}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        }
+      );
+      if (rawResponse.status != 200 && rawResponse.status != 401) {
+        setTimeout(
+          () =>
+            (document.getElementById("msgctn").innerHTML =
+              '<div class="ui red message"><div class="header">Server Error (404)</div><p = "line">cannot connecting to server</p></div>'),
+          3000
         );
-        if (rawResponse.status != 200 && rawResponse.status != 401) {
-            setTimeout(() => document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (404)</div><p = "line">cannot connecting to server</p></div>', 3000);
-            setTimeout(() => document.getElementById("nodebtn").className = "ui secondary button", 3000);
-            return
-        }
-        const content = await rawResponse.text()
-        if (rawResponse.status != 200) {
-            document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (' + rawResponse.status + ')</div><p = "line">' + content + '</p></div>';
-            document.getElementById("nodebtn").className = "ui secondary button"
-            return
-        }
-        document.getElementById("nodebtn").className = "ui secondary button"
-        document.getElementById("linectn").className = "ui disabled loader"
-        document.getElementById("line").innerText = content;
+        setTimeout(
+          () =>
+            (document.getElementById("nodebtn").className =
+              "ui secondary button"),
+          3000
+        );
+        return;
+      }
+      const content = await rawResponse.text();
+      if (rawResponse.status != 200) {
+        document.getElementById("msgctn").innerHTML =
+          '<div class="ui red message"><div class="header">Server Error (' +
+          rawResponse.status +
+          ')</div><p = "line">' +
+          content +
+          "</p></div>";
+        document.getElementById("nodebtn").className = "ui secondary button";
+        return;
+      }
+      document.getElementById("linectn").className = "ui disabled loader";
+      document.getElementById("line").innerText = content;
     }
+  </script>
 
-</script>
+  <body style="background-image: url('../darkness.png');">
+    <div
+      class="ui center aligned placeholder segment"
+      style="width: 55%; height: 30%;  margin: 50px auto; background-image: url('../noisy.png');"
+    >
+      <div
+        class="ui two column stackable center aligned grid"
+        style="overflow:auto;"
+      >
 
-<!-- <body style="background-image: url('../nami2X.png'); background-repeat: repeatback"> -->
-<body style="background-image: url('../darkness.png');">
-    <div class="ui center aligned container segment"
-        style="width: 55%; height: 230px; margin: 50px auto; background-image: url('../crossword.png');">
-        <div class="ui two column stackable center aligned grid">
-            <div class="middle aligned row" style="margin-right: 37%;">
-                <div class="column">
-                    <div class="ui inverted vertical pointing menu" style="float: right;">
-                        <a class="item active">
-                            What Was That Line ?
-                        </a>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="ui inverted segment" style="float:left; width: 490px; height: 200px;">
-                        <div class="ui inverted transparent icon input"
-                            style="float:left; padding-left: 5%; width: 60%; height: 20%;">
-                            <input id="line_number" type="text" placeholder="enter line number ...">
-                        </div>
-                        <div class="ui small buttons" style="float: left; padding-left: 5%;">
-                            <button onclick="write_nodejs()" class="ui inverted green button" id="nodebtn"
-                                
-                                >nodejs</button>
-                            <div class="or"></div>
-                            <button onclick="write_go()" class="ui inverted blue button" id="gobtn"
-                                >golang</button>
-                        </div>
-                        <div class="ui inverted segment" style="margin-top: 10%; height: 73%;" id="msgctn">
-                            <div class="ui disabled loader" id="linectn">
-                                <div class="ui text loader">Connecting</div>
-                            </div>
-                            <p id="line" style="height: 100%; width: 100%; overflow:auto ;"></p>
-                        </div>
-                    </div>
-                </div>
+        <div class="middle aligned row" style="margin-right: 37%;">
+          <div class="column">
+            <div
+              class="ui inverted vertical pointing menu"
+              style="float: right;"
+            >
+              <a class="item active">
+                What Was That Line ?
+              </a>
             </div>
+          </div>
+          <div class="column">
+            <div
+              class="ui inverted fluid segment"
+              style="float:left; width: 490px;height: 200px;"
+            >
+              <div
+                class="ui inverted transparent icon input"
+                style="float:left; padding-left: 5%; width: 60%;"
+              >
+                <input
+                  id="line_number"
+                  type="text"
+                  placeholder="enter line number ..."
+                />
+              </div>
+              <div
+                class="ui small buttons"
+                style="float: left; padding-left: 5%;"
+              >
+                <button
+                  onclick="write_nodejs()"
+                  class="ui inverted green button"
+                  id="nodebtn"
+                >
+                  nodejs
+                </button>
+                <div class="or"></div>
+                <button
+                  onclick="write_go()"
+                  class="ui inverted blue button"
+                  id="gobtn"
+                >
+                  golang
+                </button>
+              </div>
+              <div
+                class="ui inverted segment"
+                style="margin-top: 10%; height: 73%;"
+                id="msgctn"
+              >
+                <div class="ui disabled loader" id="linectn">
+                  <div class="ui text loader">Connecting</div>
+                </div>
+                <p
+                  id="line"
+                  style="height: 100%; width: 100%; overflow:auto ;"
+                ></p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    </div>
-</body>
-
+  </body>
 </html>
-
-<!-- style="background-color: #2a2b2a;" -->
-<!-- style="background-color: #2a2b2a;" -->
