@@ -124,41 +124,45 @@
       document.getElementById("line").innerText = content;
     }
   </script>
+  <!-- background-image: url('../noisy.png'); -->
 
-  <body style="background-image: url('../darkness.png');">
+  <body style="background-image: url('../background1.jpg');">
     <div
       class="ui center aligned placeholder segment"
-      style="width: 55%; height: 30%;  margin: 50px auto; background-image: url('../noisy.png');"
+      style="width: 55%; height: 30%;  margin: 50px auto; background-color: #c0e1ed;border-radius: 1rem;"
     >
       <div
         class="ui two column stackable center aligned grid"
         style="overflow:auto;"
       >
-
         <div class="middle aligned row" style="margin-right: 37%;">
           <div class="column">
             <div
               class="ui inverted vertical pointing menu"
-              style="float: right;"
+              style="float: right;background-color: #0a2f4a;"
             >
-              <a class="item active">
+              <a class="item active" style="background-color: #0a2f4a;">
                 What Was That Line ?
               </a>
             </div>
           </div>
-          <div class="column">
+          <div
+            class="column"
+            style="background-color: #0a2f4a;border-radius: 1rem;"
+          >
             <div
-              class="ui inverted fluid segment"
-              style="float:left; width: 490px;height: 200px;"
+              class="ui fluid segment"
+              style="float:left; width: 490px;height: 200px;background-color: #0a2f4a;border-radius: 1rem"
             >
               <div
-                class="ui inverted transparent icon input"
+                class="ui transparent icon input"
                 style="float:left; padding-left: 5%; width: 60%;"
               >
                 <input
                   id="line_number"
                   type="text"
-                  placeholder="enter line number ..."
+                  placeholder="Enter line number ..."
+                  style="color: #d4e8f0;"
                 />
               </div>
               <div
@@ -167,23 +171,25 @@
               >
                 <button
                   onclick="write_nodejs()"
-                  class="ui inverted green button"
+                  class="ui green button"
                   id="nodebtn"
+                  style="background-color: #258f14;border-radius: 0.5rem;"
                 >
                   nodejs
                 </button>
-                <div class="or"></div>
+                <!-- <div class="or"></div> -->
                 <button
                   onclick="write_go()"
-                  class="ui inverted blue button"
+                  class="ui blue button"
                   id="gobtn"
+                  style="border-radius: 0.5rem;margin-left: 5px;"
                 >
                   golang
                 </button>
               </div>
               <div
-                class="ui inverted segment"
-                style="margin-top: 10%; height: 73%;"
+                class="ui segment"
+                style="margin-top: 10%; height: 73%;background-color: #d4e8f0;"
                 id="msgctn"
               >
                 <div class="ui disabled loader" id="linectn">
