@@ -14,7 +14,11 @@
     function submit_nodejs() {
       (async () => {
         const rawResponse = await fetch(
+<<<<<<< HEAD
           "http://yes.io/nodejs/sha2566",
+=======
+          "http://yes.io:8080/nodejs/sha256",
+>>>>>>> 2acedf3390643d138e8e20ffe26aad5e9b9846c6
           {
             method: "POST",
             headers: {
@@ -42,7 +46,11 @@
 
     function submit_go() {
       (async () => {
+<<<<<<< HEAD
         const rawResponse = await fetch("http://yes.io/go/sha256", {
+=======
+        const rawResponse = await fetch("http://yes.io:8888/go/sha256", {
+>>>>>>> 2acedf3390643d138e8e20ffe26aad5e9b9846c6
           method: "POST",
           headers: {
             Accept: "application/json",
