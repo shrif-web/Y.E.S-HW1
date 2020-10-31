@@ -56,7 +56,7 @@ func readFile(lineNumber int) (string, error) {
 		log.Println(err)
 	}
 	log.Println("path is :==>"+path)  // for example /home/user
-	file, err := os.Open("test.txt")
+	file, err := os.Open("../nodejs/my_text.txt")
 	if err != nil {
 		log.Printf("failed opening file: %s", err)
 	}
@@ -66,7 +66,8 @@ func readFile(lineNumber int) (string, error) {
 	scanner.Split(bufio.ScanLines)
 	var textlines []string
 	for scanner.Scan() {
-		textlines = append(textlines, scanner.Text())
+		var text = scanner.Text()
+		textlines = append(textlines, text)
 	}
 	linesNumber := len(textlines)
 
@@ -90,7 +91,6 @@ func write(w http.ResponseWriter, r *http.Request) {
 }
 
 func sha256(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("salamaaaaaa")
 	switch r.Method {
 	case "POST":
 		b, err := ioutil.ReadAll(r.Body)
