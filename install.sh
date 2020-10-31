@@ -23,14 +23,13 @@ firewall-cmd --reload
 
 ######################### selinux ###################################
 setenforce 0
-
-######################### service files #############################
-NODE_PATH=$(which node)
+sed 's/SELINUX=\(.*\)/SELINUX=disabled/g' -i /etc/sysconfig/selinux
 
 ######################## config::go-server ##########################
 chmod +x go/main
 ln -s $(pwd)/go/main /usr/bin/go-server
 ####################### config::nodejs ##############################
+NODE_PATH=$(which node)
 sed "1 i\\#!$NODE_PATH " -i nodejs/main.js
 chmod +x nodejs/main.js
 ln -s $(pwd)/nodejs/main.js /usr/bin/node-server
@@ -39,6 +38,7 @@ cd nodejs
   yarn install
 cd ..
 
+######################### service files #############################
 sed "s@<path_to_binary>@$(pwd)\/go@gm" OS/services/go-server.service > /lib/systemd/system/go-server.service
 sed "s@<path_to_binary>@$(pwd)\/nodejs@gm" OS/services/nodejs-server.service > /lib/systemd/system/nodejs-server.service
 
