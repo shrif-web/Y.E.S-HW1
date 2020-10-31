@@ -1,61 +1,59 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css" />
+    <title>Y.E.S.Homepage</title>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.0/semantic.min.css"
     />
-    <title>Y.E.S. main page</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-      //   $(function() {
-      //     console.log("salam?????");
-      //     $("#writeContent").load("test.html");
-      //   });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.0/semantic.min.js"></script>
+    <script text="text/javascript">
       $(document).ready(function() {
-          console.log("salam")
-        $("#writeContent").load("test.html");
+        $(".ui.dropdown").dropdown();
       });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
   </head>
 
-  <body>
-    <div class="container">
-      <div class="split left" id="left">
-        <!-- <h1>The Designer</h1>
-        <a href="#" class="button">Read More</a> -->
+  <body style="background-image: url('darkness.png');">
+  <!-- <body style="background-image: url('nami2X.png'); background-repeat: repeatback"> -->
+    <div
+      class="ui inverted container"
+      style="width: 50%; margin: 50px auto; height: 100%;"
+    >
+      <div
+        class="ui inverted placeholder segment center aligned "
+        style="margin: 10px;"
+      >
+        <div class="ui header">
+          <i class="user circle icon"></i>
+          <div class="content">
+            Welcome to the first homework of Web Programming course!
+          </div>
+          <div class="ui divider"></div>
+          <div class="ui small header" style="color: ivory;">
+            Choose which function you want to use!
+          </div>
+        </div>
 
-        <!-- <div data-include="header"></div> -->
-
-        <!-- <div class="writeContent"></div> -->
-        <div id="writeContent"></div>
-      </div>
-      <div class="split right">
-        <h1>The Programmer</h1>
-        <a href="#" class="button">Read More</a>
+        <div class="ui segment inverted center aligned">
+          <div class="ui buttons">
+            <div style="margin: 10px;">
+              <a href="write/index.html"
+                ><button class="ui inverted big blue button">Write!</button></a
+              >
+            </div>
+            <div style="margin: 10px;">
+              <a href="sha256/index.html"
+                ><button class="ui big inverted green button">
+                  SHA256!
+                </button></a
+              >
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
   </body>
-  <script type="text/javascript">
-    const left = document.querySelector(".left");
-    const right = document.querySelector(".right");
-    const container = document.querySelector(".container");
-
-    left.addEventListener("mouseenter", () => {
-      container.classList.add("hover-left");
-    });
-
-    left.addEventListener("mouseleave", () => {
-      container.classList.remove("hover-left");
-    });
-
-    right.addEventListener("mouseenter", () => {
-      container.classList.add("hover-right");
-    });
-
-    right.addEventListener("mouseleave", () => {
-      container.classList.remove("hover-right");
-    });
-  </script>
 </html>
