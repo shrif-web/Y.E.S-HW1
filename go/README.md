@@ -8,13 +8,13 @@ API's for our go-backend:
 ```
 method: POST
 request body: json {
-        first number,
-        second number,
-        }
+                    first number,
+                    second number,
+                   }
 
 response bondy: json {
-           result string,
-        }
+                      result string,
+                     }
 ```
 errors:
 
