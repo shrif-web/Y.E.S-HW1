@@ -1,0 +1,182 @@
+<html>
+
+<head>
+  <title>Y.E.S. main page</title>
+  <link rel="stylesheet" type="text/css" href="index.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.js"
+    integrity="sha512-eOUPKZXJTfgptSYQqVilRmxUNYm0XVHwcRHD4mdtCLWf/fC9XWe98IT8H1xzBkLL4Mo9GL0xWMSJtgS5te9rQA=="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/css/alertify.css"
+    integrity="sha512-MpdEaY2YQ3EokN6lCD6bnWMl5Gwk7RjBbpKLovlrH6X+DRokrPRAF3zQJl1hZUiLXfo2e9MrOt+udOnHCAmi5w=="
+    crossorigin="anonymous" />
+</head>
+
+<script>
+  async function goWrite() {
+    const line_number = document.getElementById("line_number").value;
+    const rawResponse = await fetch(
+      `http://yes.io/go/write?number=${line_number}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    ).catch((error) => {
+      alertify.error('Server Connecting Error');
+    });
+    var content = await rawResponse.text()
+    if (rawResponse.status != 200) {
+      alertify.error('Server Error:<br>' + content);
+      return
+    }
+    document.getElementById("line").innerText = content;
+    alertify.success('Your data loaded succesfully');
+  }
+
+  async function nodeWrite() {
+    const line_number = document.getElementById("line_number").value;
+    const rawResponse = await fetch(
+      `http://yes.io/nodejs/write?number=${line_number}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    ).catch((error) => {
+      alertify.error('Server Connecting Error');
+    });
+    var content = await rawResponse.text()
+    if (rawResponse.status != 200) {
+      alertify.error('Server Error:<br>' + content);
+      return
+    }
+    document.getElementById("line").innerText = content;
+    alertify.success('Your data loaded succesfully');
+  }
+
+  async function nodeSHA() {
+    const rawResponse = await fetch("http://yes.io/nodejs/sha256", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Accept: "text/html",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        first: document.getElementById("first_input").value,
+        second: document.getElementById("second_input").value
+      })
+    }).catch((error) => {
+      alertify.error('Server Connecting Error');
+    });
+    var content = await rawResponse.text()
+    console.log(rawResponse.status)
+    if (rawResponse.status != 200) {
+      alertify.error('Server Error:<br>' + content);
+      return
+    }
+    document.getElementById("sum_res").value = content;
+    alertify.success('Your data loaded succesfully');
+  }
+
+  async function goSHA() {
+      const rawResponse = await fetch("http://yes.io/go/sha256", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          first: document.getElementById("first_input").value,
+          second: document.getElementById("second_input").value
+        })
+      }).catch((error) => {
+        alertify.error('Server Connecting Error');
+      });
+      var content = await rawResponse.text()
+      console.log(rawResponse.status)
+      if (rawResponse.status == 422) {
+        alertify.error('Server Error:<br>' + content);
+        return
+      }
+      document.getElementById("sum_res").value= content.split('\"')[3] ;
+      alertify.success('Your data loaded succesfully');
+  }
+</script>
+
+<body>
+  <h2>Y.E.S First Encounter</h2>
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+      <form action="#">
+        <h1>Write</h1>
+        <div class="social-container">
+          <a href="https://github.com/ArshiAAkhavan/Y.E.S-HW1"><i><img src="../GitHub-Mark-64px.png"
+                style="height: 50px; width:50px;" alt="Git Hub Link"></i></a>
+        </div>
+        <input type="text" placeholder="Line Number" id="line_number" />
+        <textarea name="output" id="line" cols="33" rows="6" readonly
+          style="padding-bottom: 2px; resize:none;"></textarea>
+        <a>Select the submiting server</a>
+        <div class="social-container">
+          <a id="node_write_btn" onclick="nodeWrite()"><i><img src="../iconfinder_nodejs_308444.png"
+                style="height: 50px; width:50px; padding-right: 5%;"></i></a>
+          <a id="go_write_btn" onclick="goWrite()"><i><img src="../go-icon.jpg"
+                style="height: 50px; width:50px; padding-left: 5%;"></i></a>
+        </div>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="#">
+        <h1>SHA-256</h1>
+        <div class="social-container">
+          <a href="https://github.com/ArshiAAkhavan/Y.E.S-HW1"><i><img src="../GitHub-Mark-64px.png"
+                style="height: 50px; width:50px;" alt="Git Hub Link"></i></a>
+        </div>
+        <input type="text" placeholder="Number 1" id="first_input" />
+        <input type="text" placeholder="Number 2" id="second_input" />
+        <input type="text" placeholder="Result" id="sum_res" style=" resize:none; white-space: nowrap;" disabled/>
+        <a>Select the submiting server</a>
+        <div class="social-container">
+          <a id="node_sha256_btn" onclick="nodeSHA()"><i><img src="../iconfinder_nodejs_308444.png"
+                style="height: 50px; width:50px; padding-right: 5%;"></i></a>
+          <a id="node_sha256_btn" onclick="goSHA()"><i><img src="../go-icon.jpg"
+                style="height: 50px; width:50px; padding-left: 5%;"></i></a>
+        </div>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Welcome Back!</h1>
+          <p>pick a line from our secret file</p>
+          <button class="ghost" id="signIn">Give Me SUM In SHA-256</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter 2 integer number & see the SUM in SHA-256 format</p>
+          <button class="ghost" id="signUp">Pick A Line For Me</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  const signUpButton = document.getElementById("signUp");
+  const signInButton = document.getElementById("signIn");
+  const container = document.getElementById("container");
+
+  signUpButton.addEventListener("click", () => {
+    container.classList.add("right-panel-active");
+  });
+
+  signInButton.addEventListener("click", () => {
+    container.classList.remove("right-panel-active");
+  });
+</script>
+
+</html>

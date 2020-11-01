@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post("/nodejs/sha256", function(req, res) {
   console.log("request body:", req.body);
-  if (isNaN(Number(req.body.first) + Number(req.body.second))) {
+  if (isNaN(Number(req.body.first) + Number(req.body.second)) || req.body.first == '' || req.body.second == '') {
     res.status(401).send("input integer number please");
     return;
   }
