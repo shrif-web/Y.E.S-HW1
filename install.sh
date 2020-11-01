@@ -23,7 +23,7 @@ firewall-cmd --reload
 
 ######################### selinux ###################################
 setenforce 0
-sed 's/SELINUX=\(.*\)/SELINUX=disabled/g' -i sed /etc/selinux/config
+sed 's/SELINUX=\(.*\)/SELINUX=disabled/g' -i /etc/selinux/config
 
 ######################## config::go-server ##########################
 chmod +x go/main
