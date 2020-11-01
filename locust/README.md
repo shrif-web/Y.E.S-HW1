@@ -1,11 +1,30 @@
+# Locust
 
-number of workers:	3
+Locust is a powerful tool for testing load of a website. We can define user Behavior in python code and swarm our system with millions of simultaneous users
 
-number of users:	100000
 
-user per seq:		100
 
-results:
+## Install 
+For installing locust, you should use a simple command using pip3:
+
+> pip install locust
+
+## Wrting Test
+For testing, we can simply create a python file called locustfile.py and we do configuration for load test in this file. 
+
+## Run the Test
+
+There are multiple ways to run the test. We used master mode to run the test.
+So first run the command below:
+>locust --master
+
+Then run next command:
+>locust--worker --master-host=\<master locust ip\>
+
+After running commands, locust starts up a local web server on which you can visit in your browser. In this website you can enter the number of **users** and **hatch rate** for test.
+In this page we can see the **requests per second**, **failure percentage** and other useful information.
+
+We did 2 tests, one with 100000 users and 100 users spawned per second. This is the result for the first experiment :
 ```
  Name                                                          # reqs      # fails  |     Avg     Min     Max  Median  |   req/s failures/s
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -15,35 +34,8 @@ results:
  POST /nodejs/sha256                                            26944   794(2.95%)  |    1495       2   69626    1300  |  138.53    4.08
 --------------------------------------------------------------------------------------------------------------------------------------------
  Aggregated                                                    108467  3404(3.14%)  |    1509       2   72830    1300  |  557.67   17.50
-
-Response time percentiles (approximated)
- Type     Name                                                              50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
---------|------------------------------------------------------------|---------|------|------|------|------|------|------|------|------|------|------|------|
- POST     /go/sha256                                                       1300   1500   1600   1700   1900   2100   5900   8500  63000  69000  70000  27190
- GET      /go/write                                                        1300   1500   1600   1700   1900   2100   6200  11000  66000  69000  69000  27222
- GET      /node/write                                                      1300   1500   1600   1700   1900   2100   5900   9100  67000  71000  73000  27111
- POST     /nodejs/sha256                                                   1300   1500   1600   1700   1800   2100   5600   8600  63000  69000  70000  26944
---------|------------------------------------------------------------|---------|------|------|------|------|------|------|------|------|------|------|------|
- None     Aggregated                                                       1300   1500   1600   1700   1900   2100   5900   8800  65000  69000  73000 108467
-
-Error report
- # occurrences      Error                                                                                               
---------------------------------------------------------------------------------------------------------------------------------------------
- 894                POST /go/sha256: '"HTTPError(\'500 Server Error: Internal Server Error for url: http://yes.io/go/sha256\',)"'
- 794                POST /nodejs/sha256: '"HTTPError(\'500 Server Error: Internal Server Error for url: http://yes.io/nodejs/sha256\',)"'
- 885                GET /go/write: '"HTTPError(\'500 Server Error: Internal Server Error for url: /go/write\',)"'       
- 831                GET /node/write: '"HTTPError(\'500 Server Error: Internal Server Error for url: /node/write\',)"'   
---------------------------------------------------------------------------------------------------------------------------------------------
-```
-
-
-number of workers:	3
-
-number of users:	100000
-
-user per seq:		1000
-
-results:
+ ```
+And this is result for the second test with 100000 users and 1000 user spawned per request:
 ```
  Name                                                          # reqs      # fails  |     Avg     Min     Max  Median  |   req/s failures/s
 --------------------------------------------------------------------------------------------------------------------------------------------
@@ -53,15 +45,7 @@ results:
  POST /nodejs/sha256                                            81052  7864(9.70%)  |    9511       2  170636    1600  |  168.05   16.30
 --------------------------------------------------------------------------------------------------------------------------------------------
  Aggregated                                                    328522 31740(9.66%)  |    9525       2  174345    1600  |  681.14   65.81
+ ```
+In the second test, when number of users reach to the 100000, failure percentage is 4%. But when the number of users doubled, failure percentage reached to 10%.
 
-Response time percentiles (approximated)
- Type     Name                                                              50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
---------|------------------------------------------------------------|---------|------|------|------|------|------|------|------|------|------|------|------|
- POST     /go/sha256                                                       1600   1900   2100   2200   2900 128000 130000 130000 131000 170000 174000  83277
- GET      /go/write                                                        1600   1900   2100   2200   2900 127000 130000 130000 131000 170000 171000  82829
- GET      /node/write                                                      1600   1900   2100   2200   3400 128000 130000 130000 131000 170000 171000  81364
- POST     /nodejs/sha256                                                   1600   1900   2100   2200   3000 127000 130000 130000 131000 170000 171000  81052
---------|------------------------------------------------------------|---------|------|------|------|------|------|------|------|------|------|------|------|
- None     Aggregated                                                       1600   1900   2100   2200   3000 127000 130000 130000 131000 170000 174000 328522
-
-```
+>**Note:** did the load test on server with 2 gigabytes RAM and 2 core CPU
