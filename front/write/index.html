@@ -42,7 +42,7 @@
     ).catch((error) =>{
       setTimeout(function () {
         document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (' + 404 + ')</div><p = "line">' + error + '</p></div>';
-        setTimeout(function () { document.getElementById("gobtn").className = "ui green button";}, 100);
+        setTimeout(function () { document.getElementById("gobtn").className = "ui blue button";}, 100);
       }, 2000);
     });
     try{
@@ -52,10 +52,10 @@
     }
     if (rawResponse.status == 401) {
       document.getElementById("msgctn").innerHTML = '<div class="ui red message"><div class="header">Server Error (' + rawResponse.status + ')</div><p = "line">' + content + '</p></div>';
-      document.getElementById("gobtn").className = "ui green button"
+      document.getElementById("gobtn").className = "ui blue button"
       return
     }
-    document.getElementById("gobtn").className = "ui green button"
+    document.getElementById("gobtn").className = "ui blue button"
     document.getElementById("linectn").className = "ui disabled loader"
     document.getElementById("line").innerText = content;
   }
