@@ -7,19 +7,22 @@ Locust is a powerful tool for testing load of a website. We can define user Beha
 ## Install 
 For installing locust, you should use a simple command using pip3:
 
-> pip install locust
+> pip3 install locust
 
-## Wrting Test
-For testing, we can simply create a python file called locustfile.py and we do configuration for load test in this file. 
+## Writing Test
+For testing, we can simply create a python file called ```locustfile.py``` and we do the configuration for load test.
 
-## Run the Test
+## Running
 
-There are multiple ways to run the test. We used master mode to run the test.
-So first run the command below:
->locust --master
+There are many ways to run the test. We used master-worker mode to run the tests.
 
-Then run next command:
->locust--worker --master-host=\<master locust ip\>
+So first run the command below on your master node:
+
+```locust --master```
+
+Then run next command on all worker nodes (master node can also be used as worker too):
+
+```locust--worker --master-host=<master locust ip>```
 
 After running commands, locust starts up a local web server on which you can visit in your browser. In this website you can enter the number of **users** and **hatch rate** for test.
 In this page we can see the **requests per second**, **failure percentage** and other useful information.
@@ -46,6 +49,12 @@ And this is result for the second test with 100000 users and 1000 user spawned p
 --------------------------------------------------------------------------------------------------------------------------------------------
  Aggregated                                                    328522 31740(9.66%)  |    9525       2  174345    1600  |  681.14   65.81
  ```
-In the second test, when number of users reach to the 100000, failure percentage is 4%. But when the number of users doubled, failure percentage reached to 10%.
+In the second test, when number of users reached 100000, failure percentage went up to 4%.
+But as the test users doubled, failure percentage reached 10%.
 
->**Note:** did the load test on server with 2 gigabytes RAM and 2 core CPU
+### hardware configuration:
+>number of workers: 3
+>
+>workers hardware: 2 cores of CPU with 2 GB of ram
+>
+>**Note:** yes.io server was also configured with 2 gigabytes of RAM and 2 cores of CPU
