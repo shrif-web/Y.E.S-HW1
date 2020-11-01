@@ -2,21 +2,23 @@
 
 this API implemented with semantic UI framework. API's for our front-end:
 
-## /
+### /
+the Main front page which redirects to ```/home```
 
-the Main front page which has both sha-256 & write with beutiful gui & responsive animations
+### /home
+the Main front page which has both sha-256 & write with  beautiful GUI and responsive animations
 
-## /old
+### /old
 
-the secondary home page which just has links to /sha256 & /write pages , its fast & has simple gui
+the secondary home page which just has links to ```/sha256``` & ```/write``` pages , its fast and has simple GUI
 
-## /sha256
+### /sha256
 
-this API gets two numbers, add them together and returns the sum in sha256 hash algorithm
+this page gets two numbers, and calls the ```/<go|node>/sha256``` API
 
-## /write
+### /write
 
-this API gets a number (i.e. I) and returns the I'th line in a specific file in our servers (1<=I<=100)
+this page gets a number (i.e. I) and calls the ```/<go|node>/write``` API
 
 
 
