@@ -21,7 +21,7 @@ errors:
 ```should any of the request body keys contain none numerical character ==> 422```
 
 ### /go/write
-> this API gets a number (i.e. I) and returns the I'th line in a specific file in our servers
+> this API gets a number (i.e. I) and returns the I'th line in a specific file in our servers (1<=I<=100)
 
 ```
 method: GET
