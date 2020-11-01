@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SERVER_IP_ADDRESS=$1
-
 ########################## nginx ####################################
 yum update -y
 yum install epel-release -y
