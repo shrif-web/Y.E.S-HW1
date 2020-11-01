@@ -1,4 +1,8 @@
 
+number of workers:	3
+number of users:	100000
+user per seq:		1000
+
 results:
 ```
  Name                                                          # reqs      # fails  |     Avg     Min     Max  Median  |   req/s failures/s
