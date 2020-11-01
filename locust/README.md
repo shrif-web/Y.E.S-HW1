@@ -1,6 +1,6 @@
 
 results:
-
+```
  Name                                                          # reqs      # fails  |     Avg     Min     Max  Median  |   req/s failures/s
 --------------------------------------------------------------------------------------------------------------------------------------------
  POST /go/sha256                                                27190   894(3.29%)  |    1465       2   70023    1300  |  139.80    4.60
@@ -28,4 +28,4 @@ Error report
  885                GET /go/write: '"HTTPError(\'500 Server Error: Internal Server Error for url: /go/write\',)"'       
  831                GET /node/write: '"HTTPError(\'500 Server Error: Internal Server Error for url: /node/write\',)"'   
 --------------------------------------------------------------------------------------------------------------------------------------------
-
+```
