@@ -17,7 +17,7 @@ or
 just run the following commands on your desire directory (not root)!
 
 ```
-git clone https://github.com/ArshiAAkhavan/Y.E.S-HW1.git
+git clone https://github.com/shrif-web/Y.E.S-HW1.git
 cd Y.E.S-HW1
 chmod +x install.sh
 sudo ./install.sh
