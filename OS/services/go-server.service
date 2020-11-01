@@ -8,7 +8,6 @@ User=root
 Group=root
 WorkingDirectory=<path_to_binary>
 ExecStart=/usr/bin/go-server
-ExecStop=/usr/bin/kill -9 $(ps -aux | grep go-server | awk '{print$2}' | head -n 1)
 ExecStartPre=/usr/bin/chmod +x <path_to_binary>
 
 [Install]
