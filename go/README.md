@@ -1,9 +1,36 @@
-## Run .go fiile
+# GO backend API
 
-You can go to the go directory and simply run the command below to run main.go:
->go run main.go
+API's for our go-backend:
 
-Or you can build main.go with below command , it will create a binary executable file in the current directory and the run ./main.go
->go build main.go
+### /go/sha256
 
->./main
+> this API gets two numbers, add them together and returns the sum in sha256 hash algorithm
+```
+method: POST
+request body: json {
+        first number,
+        second number,
+        }
+
+response bondy: json {
+           result string,
+        }
+```
+errors:
+
+```should any of the request body keys contain none numerical character ==> 422```
+
+### /go/write
+> this API gets a number (i.e. I) and returns the I'th line in a specific file in our servers
+
+```
+method: GET
+request body: NULL
+request param: number
+
+response bondy: raw string
+```
+errors:
+
+```should the number param be greater than 100 ==> 405```
+
