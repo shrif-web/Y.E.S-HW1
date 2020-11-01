@@ -9,12 +9,12 @@
 
 on your server machine:
 
-clone this repo to any of your desire directories (other than /root directory)
-change directory to the repo directory and run ```install.sh``` script as root
+clone this repo anywhere you want (other than /root directory)
+```cd``` to the repo directory and run ```install.sh``` script as root
 
 or
 
-just run the following commands on your desire directory (not root)!
+just simply run the following commands on your desire directory (not /root)!
 
 ```
 git clone https://github.com/shrif-web/Y.E.S-HW1.git
