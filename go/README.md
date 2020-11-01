@@ -5,7 +5,7 @@ API's for our go-backend:
 ### /go/sha256
 
 > this API gets two numbers, add them together and returns the sum in sha256 hash algorithm
-```
+```HTTP
 method: POST
 request body: json {
                     first number,
@@ -23,7 +23,7 @@ errors:
 ### /go/write
 > this API gets a number (i.e. I) and returns the I'th line in a specific file in our servers
 
-```
+```HTTP
 method: GET
 request body: NULL
 request param: number
