@@ -17,7 +17,7 @@ or
 just run the following commands on your desire directory (not root)!
 
 ```
-git clone https://github.com/ArshiAAkhavan/Y.E.S-HW1.git
+git clone https://github.com/shrif-web/Y.E.S-HW1.git
 cd Y.E.S-HW1
 chmod +x install.sh
 sudo ./install.sh
@@ -28,8 +28,8 @@ there you go!
 your server is up and running on your server, and you can communicate it using the http://yes.io domain
 
 ### setting up your local DNS
-if you are deploying our server on your local machine, you need to set your local DNS to return your machine IP address 
-when ever you use the yes.io domain
+if you are deploying our server on a machine, you need to configure your local DNS, in a way that it returns your machine IP address 
+whenever you are using the http://yes.io domain
 
 on your local machine, run:
 
